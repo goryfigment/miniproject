@@ -1,0 +1,32 @@
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+
+
+class User(AbstractBaseUser):
+    email = models.EmailField(max_length=255, unique=True, blank=True, null=True)
+    username = models.CharField(max_length=15, unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    reset_link = models.CharField(default=None, max_length=255,null=True)
+    reset_date = models.IntegerField(default=None, blank=True, null=True)
+    is_staff = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=True)
+    # password = models.CharField(max_length=255)
+    # last_login = models.DateTimeField(default=timezone.now, blank=True)
+
+    USERNAME_FIELD = 'username'
+
+    def __unicode__(self):
+        return self.email
+
+    def get_short_name(self):
+        return self.first_name
+
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):
+        return self.is_superuser
+
+    class Meta:
+        db_table = "user"
