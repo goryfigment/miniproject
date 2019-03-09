@@ -1,5 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+from django_mysql.models import JSONField
+import time
+
+
+def get_utc_epoch_time():
+    return int(round(time.time()))
 
 
 class User(AbstractBaseUser):
@@ -30,3 +36,19 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = "user"
+
+
+class Lesson(models.Model):
+    creator = models.ForeignKey(User, default=None)
+    date = models.IntegerField(default=get_utc_epoch_time, blank=True)
+    name = models.CharField(max_length=100)
+    file_url = models.CharField(max_length=100)
+    tags = JSONField()
+    program = models.CharField(choices=(('ELAA', 'ELAA'), ('GED', 'GED')), max_length=255, default='ELAA')
+    subject = models.CharField(max_length=100)
+    level = models.IntegerField()
+    block = models.IntegerField()
+    standard = models.IntegerField()
+
+    class Meta:
+        db_table = "lesson"

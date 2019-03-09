@@ -1,6 +1,9 @@
+import json
 from django.shortcuts import render
 from miniproject.modules.base import get_base_url
 from django.http import HttpResponseRedirect
+from miniproject.models import Lesson
+from miniproject.modules.base import models_to_dict
 
 
 def error_page(request):
@@ -80,7 +83,8 @@ def dashboard(request):
     data = {
         'base_url': get_base_url(),
         'username': current_user.username,
-        'name': current_user.first_name + ' ' + current_user.last_name
+        'name': current_user.first_name + ' ' + current_user.last_name,
+        'lessons': json.dumps(models_to_dict(Lesson.objects.all()))
     }
 
     # Only go to dashboard if user is logged in

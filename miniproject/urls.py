@@ -19,4 +19,5 @@ urlpatterns = [
 
     #Dashboard
     url(r'^file_upload/$', dashboard.file_upload, name='file_upload'),
+    url(r'^print/$', dashboard.print_pdf, name='print'),
 ]

@@ -9,7 +9,10 @@
         var globals = {};
         globals.base_url = '{{base_url}}';
         globals.file = null;
+        globals.lessons = {{lessons|safe}};
     </script>
+
+    <script src="{% static 'library/print/print.js' %}"></script>
 </head>
 <body>
     {% csrf_token %}
@@ -22,6 +25,7 @@
         </div>
         <div id="nav-wrapper">
             <span class="nav-links" id="home-link">Home</span>
+{#            <span class="nav-links" id="create-document-link">Create Document</span>#}
             <span class="nav-links" id="account-link">Account</span>
             <div id="account-wrapper">
                 <div>{{ name }}
@@ -32,11 +36,26 @@
         </div>
     </div>
 
-    <div id="lesson-list-wrapper">
-        <div id="drag-and-drop">
-            <i class="fas fa-file"></i>
-            Drag & Drop
-        </div>
+    <div id="body-wrapper">
+        <div id="lesson-list-wrapper"></div>
+{#        <div id="activity-wrapper">#}
+{#            <table id="lesson-table">#}
+{#                <thead>#}
+{#                    <tr>#}
+{#                        <th scope="col">Date</th>#}
+{#                        <th scope="col">Author</th>#}
+{#                        <th scope="col">Lesson</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    <tr>#}
+{#                        <td class="lesson-id">Mar 8th, 12:00PM</td>#}
+{#                        <td class="lesson-name">Katie Perrie</td>#}
+{#                        <td>How to use a Tampon</td>#}
+{#                    </tr>#}
+{#                </tbody>#}
+{#            </table>#}
+{#        </div>#}
     </div>
 
     <div id="overlay">
@@ -63,7 +82,7 @@
                     <div id="file-section-2">
                         <div>
                             <label for="tag-input">Tags</label>
-                            <div id="tag-wrapper"></div>
+                            <div class="tag-wrapper"></div>
                             <p>Separate unique tags with a comma.</p>
                             <input id="tag-input" />
                         </div>

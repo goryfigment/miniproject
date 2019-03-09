@@ -1,6 +1,71 @@
-webpackJsonp([2],{
+webpackJsonp([3],{
 
-/***/ 0:
+/***/ 15:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+__webpack_require__(16);
+var $ = __webpack_require__(2);
+
+function init() {
+    $('#username').focus();
+    $('#home-header').show();
+    $('.inner-wrapper').show();
+}
+
+$(document).ready(function() {
+
+    init();
+
+    $(document).on('keyup', '#username', function (e) {
+        if (e.keyCode == 13) {
+            $('#password').select();
+        }
+    });
+
+    $(document).on('keyup', '#password', function (e) {
+        if (e.keyCode == 13) {
+            $('#login').click();
+        }
+    });
+
+    $(document).on('click', '#login', function () {
+        var $submit = $(this);
+        var $loginContainer = $submit.closest('#login-container');
+
+        var postData = {
+            'username': $loginContainer.find('#username').val(),
+            'password': $loginContainer.find('#password').val()
+        };
+
+        $.ajax({
+            headers: {"X-CSRFToken": $submit.siblings('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/account/login/',
+            data: postData,
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                if (response['success']) {
+                    window.location.replace(globals.base_url + '/dashboard');
+                }
+            },
+            error: function (response) {
+                $('.error').show();
+            }
+        });
+    });
+});
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10259,71 +10324,6 @@ return jQuery;
 } );
 
 
-/***/ }),
-
-/***/ 7:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-__webpack_require__(8);
-var $ = __webpack_require__(0);
-
-function init() {
-    $('#username').focus();
-    $('#home-header').show();
-    $('.inner-wrapper').show();
-}
-
-$(document).ready(function() {
-
-    init();
-
-    $(document).on('keyup', '#username', function (e) {
-        if (e.keyCode == 13) {
-            $('#password').select();
-        }
-    });
-
-    $(document).on('keyup', '#password', function (e) {
-        if (e.keyCode == 13) {
-            $('#login').click();
-        }
-    });
-
-    $(document).on('click', '#login', function () {
-        var $submit = $(this);
-        var $loginContainer = $submit.closest('#login-container');
-
-        var postData = {
-            'username': $loginContainer.find('#username').val(),
-            'password': $loginContainer.find('#password').val()
-        };
-
-        $.ajax({
-            headers: {"X-CSRFToken": $submit.siblings('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/account/login/',
-            data: postData,
-            dataType: 'json',
-            type: "POST",
-            success: function (response) {
-                if (response['success']) {
-                    window.location.replace(globals.base_url + '/dashboard');
-                }
-            },
-            error: function (response) {
-                $('.error').show();
-            }
-        });
-    });
-});
-
-/***/ }),
-
-/***/ 8:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
 /***/ })
 
-},[7]);
+},[15]);

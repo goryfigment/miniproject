@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 from miniproject.decorators import login_required, data_required
 from django.forms.models import model_to_dict
 from miniproject.models import User
+from miniproject.settings_secret import GMAIL, GMAIL_PASSWORD
 
 
 @data_required(['username', 'email', 'password', 'first_name', 'last_name'], 'POST')
@@ -148,12 +149,12 @@ def reset_password(request):
 
     # Create message container - the correct MIME type is multipart/alternative.
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "Whey2eZ - Forgotten Password"
+    msg['Subject'] = "LVMC - Forgotten Password"
     msg['From'] = from_email
     msg['To'] = to_email
 
     # Create the body of the message (a plain-text and an HTML version).
-    text = "Hi " + name + "!\nWe received a request to reset your Whey2eZ password.\n\n" \
+    text = "Hi " + name + "!\nWe received a request to reset your LVMC password.\n\n" \
            "Click the link to change your password: " + link
     html = """\
     <html>
@@ -161,7 +162,7 @@ def reset_password(request):
       <body>
         <div>
         <p>Hi """ + name + """!<br><br>
-           We received a request to reset your Whey2eZ password.<br><br>
+           We received a request to reset your LVMC password.<br><br>
            <a href='""" + link + """'>Click here to change your password.</a>
         </p>
       </body>

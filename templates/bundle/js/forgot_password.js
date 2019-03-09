@@ -1,6 +1,105 @@
 webpackJsonp([4],{
 
-/***/ 0:
+/***/ 17:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+__webpack_require__(18);
+var $ = __webpack_require__(2);
+
+function init() {
+    $('#username').focus();
+    $('#home-header').show();
+    $('.inner-wrapper').show();
+}
+
+$(document).ready(function() {
+    init();
+
+    $(document).on('keyup', '#username', function (e) {
+        if (e.keyCode == 13) {
+            $('#submit').click();
+        }
+    });
+
+    $(document).on('click', '#submit', function () {
+        var $submit = $(this);
+        var $forgotPasswordContainer = $submit.closest('#forgot-password-wrapper');
+
+        var postData = {
+            'username': $forgotPasswordContainer.find('#username').val(),
+            'base_url': globals.base_url
+        };
+
+        $.ajax({
+            headers: {"X-CSRFToken": $submit.siblings('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/account/reset_password/',
+            data: postData,
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                if (response['success']) {
+                    $forgotPasswordContainer.find('#forgot-password-container').hide();
+                    $forgotPasswordContainer.find('#email-sent').show();
+                }
+            },
+            error: function (response) {
+                $('.error').show();
+            }
+        });
+    });
+
+    $(document).on('click', '#change-password', function () {
+        var $submit = $(this);
+        var $forgotPasswordContainer = $submit.closest('#forgot-password-wrapper');
+        var password1 = $forgotPasswordContainer.find('#password-1').val();
+        var password2 = $forgotPasswordContainer.find('#password-2').val();
+        var $error = $('.error');
+
+        if(password1 != password2) {
+            $error.text('Passwords do not match.');
+            $error.show();
+            return;
+        }
+
+        var code = (new URL(window.location.href)).searchParams.get("code");
+
+        var postData = {
+            'password1': $forgotPasswordContainer.find('#password-1').val(),
+            'password2': $forgotPasswordContainer.find('#password-2').val(),
+            'code': code
+        };
+
+        $.ajax({
+            headers: {"X-CSRFToken": $submit.siblings('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/account/change_password/',
+            data: postData,
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                if (response['success']) {
+                    $forgotPasswordContainer.find('#forgot-password-container').hide();
+                    $forgotPasswordContainer.find('#success').show();
+                }
+            },
+            error: function (response) {
+                $error.text(response.responseJSON['error_msg']);
+                $('.error').show();
+            }
+        });
+    });
+});
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10259,98 +10358,6 @@ return jQuery;
 } );
 
 
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../css/forgot_password.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-var $ = __webpack_require__(0);
-
-function init() {
-    $('#username').focus();
-    $('#home-header').show();
-    $('.inner-wrapper').show();
-}
-
-$(document).ready(function() {
-    init();
-
-    $(document).on('keyup', '#username', function (e) {
-        if (e.keyCode == 13) {
-            $('#submit').click();
-        }
-    });
-
-    $(document).on('click', '#submit', function () {
-        var $submit = $(this);
-        var $forgotPasswordContainer = $submit.closest('#forgot-password-wrapper');
-
-        var postData = {
-            'username': $forgotPasswordContainer.find('#username').val(),
-            'base_url': globals.base_url
-        };
-
-        $.ajax({
-            headers: {"X-CSRFToken": $submit.siblings('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/account/reset_password/',
-            data: postData,
-            dataType: 'json',
-            type: "POST",
-            success: function (response) {
-                if (response['success']) {
-                    $forgotPasswordContainer.find('#forgot-password-container').hide();
-                    $forgotPasswordContainer.find('#email-sent').show();
-                }
-            },
-            error: function (response) {
-                $('.error').show();
-            }
-        });
-    });
-
-    $(document).on('click', '#change-password', function () {
-        var $submit = $(this);
-        var $forgotPasswordContainer = $submit.closest('#forgot-password-wrapper');
-        var password1 = $forgotPasswordContainer.find('#password-1').val();
-        var password2 = $forgotPasswordContainer.find('#password-2').val();
-        var $error = $('.error');
-
-        if(password1 != password2) {
-            $error.text('Passwords do not match.');
-            $error.show();
-            return;
-        }
-
-        var code = (new URL(window.location.href)).searchParams.get("code");
-
-        var postData = {
-            'password1': $forgotPasswordContainer.find('#password-1').val(),
-            'password2': $forgotPasswordContainer.find('#password-2').val(),
-            'code': code
-        };
-
-        $.ajax({
-            headers: {"X-CSRFToken": $submit.siblings('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/account/change_password/',
-            data: postData,
-            dataType: 'json',
-            type: "POST",
-            success: function (response) {
-                if (response['success']) {
-                    $forgotPasswordContainer.find('#forgot-password-container').hide();
-                    $forgotPasswordContainer.find('#success').show();
-                }
-            },
-            error: function (response) {
-                $error.text(response.responseJSON['error_msg']);
-                $('.error').show();
-            }
-        });
-    });
-});
-
 /***/ })
 
-},[9]);
+},[17]);

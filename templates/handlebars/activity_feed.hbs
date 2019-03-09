@@ -1,0 +1,18 @@
+<table id="activity-table">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Author</th>
+            <th scope="col">Lesson</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each this}}
+            <tr>
+                <td class="lesson-id">{{date}}</td>
+                <td class="lesson-name">{{name}}</td>
+                <td>{{lesson}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

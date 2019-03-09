@@ -61,7 +61,6 @@
     margin-left: auto;
     padding: 0 30px;
     position: relative;
-    overflow: hidden;
     white-space: nowrap;
 }
 
@@ -87,6 +86,7 @@
     width: 200px;
     background: #242323;
     display: none;
+    white-space: normal;
 }
 
 #account-wrapper div {
@@ -125,22 +125,8 @@
 /* ACCOUNT WRAPPER */
 
 /* LESSONS */
-#drag-and-drop {
-    border: dashed #7a4949;
-    background: #262626;
-    height: 75px;
-    font-size: 18px;
-    line-height: 75px;
-    padding: 0 10px;
-    color: #d1d1d1;
-    font-weight: 600;
-    margin: 15px 0;
-    text-align: center;
-}
-
-#drag-and-drop svg {
-    padding: 0 12px;
-    font-size: 20px;
+#body-wrapper {
+    display: flex;
 }
 
 #lesson-list-wrapper {
@@ -152,7 +138,7 @@
 /* LESSONS */
 
 /* FILE UPLOAD */
-#overlay {
+#overlay, #file-preview-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -167,8 +153,13 @@
     color: #ffffff;
 }
 
-#overlay.active {
+#overlay.active, #file-preview-overlay.active {
     display: flex;
+}
+
+#file-preview-overlay iframe {
+    width: 90%;
+    height: 80%;
 }
 
 .drop #dragover-wrapper {
@@ -277,11 +268,11 @@
     color: #f1f1f1;
 }
 
-#tag-wrapper:not:empty {
+.tag-wrapper:not:empty {
     padding: 5px 0;
 }
 
-#tag-wrapper span {
+.tag-wrapper span {
     background: #e99191;
     color: #fff;
     padding: 5px 12px;
@@ -293,7 +284,7 @@
     cursor: pointer;
 }
 
-#tag-wrapper svg {
+.tag-wrapper svg {
     padding: 2px 0 2px 4px;
     margin-bottom: -2.5px;
 }
@@ -395,3 +386,57 @@
     background: #c66464;
 }
 /* FILE UPLOAD */
+
+/*LESSON TABLE*/
+#lesson-table {
+    width: 100%;
+}
+
+#lesson-table thead {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+#lesson-table tbody tr {
+    text-align: center;
+    height: 52px;
+    background: #151515;
+    color: #f67a7a;
+}
+
+#lesson-table tbody tr td {
+    height: 65px;
+}
+
+#lesson-table .action-wrapper {
+    width: 175px;
+}
+
+.action-wrapper button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 18px;
+    transition: all 150ms ease-out;
+}
+
+.action-wrapper button:hover {
+    font-size: 21px;
+}
+
+#lesson-table .tag {
+    font-size: 13px;
+    padding: 3px 8px;
+    margin-top: 10px;
+}
+
+#print-button {
+    color: #35bcff;
+}
+
+#download-button {
+    color: #53ffb9;
+}
+/*LESSON TABLE*/
