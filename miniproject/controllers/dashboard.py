@@ -1,4 +1,4 @@
-import json, os, comtypes.client, pythoncom
+import json, os
 from django.http import JsonResponse, HttpResponseBadRequest
 from miniproject.decorators import login_required, data_required
 from miniproject.models import Lesson
@@ -58,21 +58,21 @@ def print_pdf(request):
     word_file = os.path.join(lesson_path, file_name)
     pdf_file = os.path.join(temporary_path, pdf_file_name)
 
-    pythoncom.CoInitialize()
-
-    # Delete all files in temporary folder
-    for the_file in os.listdir(temporary_path):
-        file_path = os.path.join(temporary_path, the_file)
-        try:
-            if os.path.isfile(file_path):
-                os.unlink(file_path)
-        except Exception as e:
-            print(e)
-
-    word = comtypes.client.CreateObject('Word.Application')
-    doc = word.Documents.Open(word_file)
-    doc.SaveAs(pdf_file, FileFormat=17)
-    doc.Close()
-    word.Quit()
+    # pythoncom.CoInitialize()
+    #
+    # # Delete all files in temporary folder
+    # for the_file in os.listdir(temporary_path):
+    #     file_path = os.path.join(temporary_path, the_file)
+    #     try:
+    #         if os.path.isfile(file_path):
+    #             os.unlink(file_path)
+    #     except Exception as e:
+    #         print(e)
+    #
+    # word = comtypes.client.CreateObject('Word.Application')
+    # doc = word.Documents.Open(word_file)
+    # doc.SaveAs(pdf_file, FileFormat=17)
+    # doc.Close()
+    # word.Quit()
 
     return JsonResponse({'pdf_file': pdf_file_name}, safe=False)
