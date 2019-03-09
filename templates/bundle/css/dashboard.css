@@ -94,6 +94,29 @@
     padding: 20px 30px;
 }
 
+#empty-lesson-wrapper {
+    text-align: center;
+    border: 1.5px dashed #eb6666;
+    height: 97%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    color: #ff7474;
+}
+
+#empty-lesson-icon {
+    font-size: 250px;
+}
+
+#drag-drop-text {
+    color: white;
+    font-size: 28px;
+    margin-left: 50px;
+}
+
 #logout-icon {
     margin-right: 10px;
 }
@@ -122,6 +145,7 @@
 #username {
     color: #a1a1a1;
     font-size: 13px;
+    display: block;
 }
 /* ACCOUNT WRAPPER */
 

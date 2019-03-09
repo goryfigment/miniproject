@@ -1,14 +1,22 @@
 require('./../css/general.css');
 require('./../css/dashboard.css');
 require('./../library/fontawesome/fontawesome.js');
+require('./../library/print/print.js');
 var $ = require('jquery');
 
 var tagTemplate = require('./../handlebars/tag.hbs');
 var lessonTemplate = require('./../handlebars/lessons.hbs');
+var emptyLessonTemplate = require('./../handlebars/empty_lessons.hbs');
 
 function init() {
     var $lessonListWrapper = $('#lesson-list-wrapper');
-    $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+    if(globals.lessons.length) {
+        $lessonListWrapper.append(lessonTemplate(globals.lessons));
+    } else {
+        $lessonListWrapper.append(emptyLessonTemplate(globals.lessons));
+    }
+
     //var $lessonListWrapper = $('#lesson-list-wrapper');
     //$lessonListWrapper.append(lessonTemplate(globals.lessons));
 }
