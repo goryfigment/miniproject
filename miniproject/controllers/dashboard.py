@@ -1,4 +1,4 @@
-import json, os, win32com.client, pythoncom
+import json, os, comtypes.client, pythoncom
 from django.http import JsonResponse, HttpResponseBadRequest
 from miniproject.decorators import login_required, data_required
 from miniproject.models import Lesson
@@ -69,7 +69,7 @@ def print_pdf(request):
         except Exception as e:
             print(e)
 
-    word = win32com.client.Dispatch('Word.Application')
+    word = comtypes.client.CreateObject('Word.Application')
     doc = word.Documents.Open(word_file)
     doc.SaveAs(pdf_file, FileFormat=17)
     doc.Close()
