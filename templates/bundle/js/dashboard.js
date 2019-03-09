@@ -11078,7 +11078,7 @@ var $ = __webpack_require__(2);
 
 var tagTemplate = __webpack_require__(22);
 var lessonTemplate = __webpack_require__(38);
-var emptyLessonTemplate = __webpack_require__(40);
+var emptyLessonTemplate = __webpack_require__(39);
 
 function init() {
     var $lessonListWrapper = $('#lesson-list-wrapper');
@@ -12246,8 +12246,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 39 */,
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(9);
