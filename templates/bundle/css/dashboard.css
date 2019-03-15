@@ -97,18 +97,18 @@
 #empty-lesson-wrapper {
     text-align: center;
     border: 1.5px dashed #eb6666;
-    height: 97%;
+    height: calc(100% - 85px);
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
         align-items: center;
     -ms-flex-pack: center;
         justify-content: center;
-    color: #ff7474;
 }
 
 #empty-lesson-icon {
     font-size: 170px;
+    color: #ff7474;
 }
 
 #drag-drop-text {
@@ -157,9 +157,11 @@
 
 #lesson-list-wrapper {
     margin: 0 auto;
-    width: calc(100vw - 200px);
     min-width: 700px;
-    height: calc(100vh - 87px);
+    height: calc(100vh - 88px);
+    box-shadow: inset 0 0 4px 1px rgba(141, 141, 141, 0.2), 0 3px 24px rgba(100, 100, 100, 0.2);
+    padding: 0 45px;
+    width: calc(100vw - 200px);
 }
 /* LESSONS */
 
@@ -474,3 +476,7 @@
     color: #53ffb9;
 }
 /*LESSON TABLE*/
+
+#edit-button, #delete-button {
+    display: none;
+}

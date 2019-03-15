@@ -1,5 +1,6 @@
 require('./../css/general.css');
 require('./../css/dashboard.css');
+require('./../css/admin.css');
 require('./../library/fontawesome/fontawesome.js');
 require('./../library/print/print.js');
 var $ = require('jquery');
@@ -7,14 +8,24 @@ var $ = require('jquery');
 var tagTemplate = require('./../handlebars/tag.hbs');
 var lessonTemplate = require('./../handlebars/lessons.hbs');
 var emptyLessonTemplate = require('./../handlebars/empty_lessons.hbs');
+var emptyActivityTemplate = require('./../handlebars/empty_activity.hbs');
+var activityFeedTemplate = require('./../handlebars/activity_feed.hbs');
 
 function init() {
     var $lessonListWrapper = $('#lesson-list-wrapper');
+    var $activityWrapper = $('#activity-wrapper');
 
     if(globals.lessons.length) {
         $lessonListWrapper.append(lessonTemplate(globals.lessons));
+        $activityWrapper.append(activityFeedTemplate(globals.lessons));
     } else {
         $lessonListWrapper.append(emptyLessonTemplate(globals.lessons));
+        $activityWrapper.append(emptyActivityTemplate(globals.lessons));
+    }
+
+    for (var i = 0; i < globals.lessons.length; i++) {
+        var currentLesson = globals.lessons[i];
+        $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
     }
 }
 
@@ -58,6 +69,8 @@ $(document).ready(function() {
         var $overlay = $('#overlay');
         $overlay.removeClass('active');
         $overlay.removeClass('drop');
+        $overlay.removeClass('edit');
+        $overlay.removeClass('delete');
     });
 
     $(document).on('click', 'body', function () {
@@ -80,7 +93,7 @@ $(document).ready(function() {
     });
 
     $('#overlay').on({
-        'dragexit dragleave': function() {
+        'dragexit dragleave': function(e) {
             $('#overlay').removeClass('active');
         },
         'drop': function(e) {
@@ -92,7 +105,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', '#lesson-submit-button', function () {
+    $(document).on('click', '.drop #lesson-submit-button', function () {
         var formData = new FormData();
         var $tags = $('#overlay').find('.tag');
         var tags = [];
@@ -122,10 +135,16 @@ $(document).ready(function() {
             success: function (response) {
                 console.log(JSON.stringify(response));
                 $('#lesson-cancel-button').click();
-                var $lessonListWrapper = $('#lesson-list-wrapper');
                 globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
                 $lessonListWrapper.empty();
                 $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
             }
         });
     });
@@ -134,18 +153,6 @@ $(document).ready(function() {
     //PRINT//
     $(document).on('click', '#print-button', function () {
         var file_name = $(this).attr('data-file_name');
-
-        //$.ajax({
-        //    headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-        //    url: globals.base_url + '/print/',
-        //    data: {'file_name': file_name},
-        //    dataType: 'json',
-        //    type: "POST",
-        //    success: function (response) {
-        //        //console.log(JSON.stringify(response));
-        //        printJS('/templates/bundle/assets/temporary/' + response['pdf_file']);
-        //    }
-        //});
 
         printJS('/templates/bundle/assets/lessons/' + file_name);
     });
@@ -190,4 +197,130 @@ $(document).ready(function() {
         $searchInput.keyup();
     });
     //SEARCH//
+
+    //EDIT//
+    $(document).on('click', '#edit-button', function (e) {
+        e.stopPropagation();
+        var $this = $(this);
+        var lesson = $this.closest('.lesson').data('lesson');
+        var $overlay = $('#overlay');
+
+        $overlay.addClass('edit');
+
+        var $tagWrapper = $('#upload-wrapper .tag-wrapper');
+        $tagWrapper.empty();
+
+        for (var t = 0; t < lesson['tags'].length; t++) {
+            $tagWrapper.append(tagTemplate({value: lesson['tags'][t]}));
+        }
+
+        $('#file-name-input').val(lesson['name']);
+        $('#program-input').val(lesson['program']);
+        $('#subject-input').val(lesson['subject']);
+        $('#level-input').val(lesson['level']);
+        $('#block-input').val(lesson['block']);
+        $('#standard-input').val(lesson['standard']);
+        $('#lesson-submit-button').attr('data-id', lesson['id']);
+
+        globals.file = null;
+    });
+
+    $(document).on('click', '.edit #lesson-submit-button', function () {
+        var formData = new FormData();
+        var $tags = $('#overlay').find('.tag');
+        var tags = [];
+
+        for (var i = 0; i < $tags.length; i++) {
+            var $currentTag = $($tags[i]);
+            tags.push($currentTag.attr('data-value'));
+        }
+
+        if (globals.file !== null) {
+            formData.append('file', globals.file);
+        }
+
+        formData.append('id', $('#lesson-submit-button').attr('data-id'));
+        formData.append('lesson_name', $('#file-name-input').val());
+        formData.append('tags', JSON.stringify(tags));
+        formData.append('program', $('#program-input').val());
+        formData.append('subject', $('#subject-input').val());
+        formData.append('level', $('#level-input').val());
+        formData.append('block', $('#block-input').val());
+        formData.append('standard', $('#standard-input').val());
+
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/edit_lesson/',
+            data: formData,
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log(JSON.stringify(response));
+                $('#lesson-cancel-button').click();
+                globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
+                $lessonListWrapper.empty();
+                $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
+            }
+        });
+    });
+    //EDIT//
+
+    //DELETE//
+    $(document).on('click', '#delete-wrapper', function (e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('click', '#delete-button', function (e) {
+        e.stopPropagation();
+        var $this = $(this);
+        var lesson = $this.closest('.lesson').data('lesson');
+        var $overlay = $('#overlay');
+
+        $('#delete-lesson-id').text(lesson['id']);
+        $('#delete-submit-button').attr('data-id', lesson['id']);
+
+        $overlay.addClass('delete');
+    });
+
+    $(document).on('click', '#delete-cancel-button', function (e) {
+        e.stopPropagation();
+        var $overlay = $('#overlay');
+        $overlay.removeClass('active');
+        $overlay.removeClass('delete');
+    });
+
+
+    $(document).on('click', '#delete-submit-button', function () {
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/delete_lesson/',
+            data: {'id': $(this).attr('data-id')},
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                $('#delete-cancel-button').click();
+                globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
+                $lessonListWrapper.empty();
+                $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
+            }
+        });
+    });
+
+    //DELETE//
 });

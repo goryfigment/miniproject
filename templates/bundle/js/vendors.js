@@ -34,7 +34,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		5: 0
+/******/ 		6: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -149,7 +149,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ 5:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

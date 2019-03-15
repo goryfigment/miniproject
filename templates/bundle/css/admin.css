@@ -1,4 +1,5 @@
 #header-wrapper {
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -97,9 +98,12 @@
     text-align: center;
     border: 1.5px dashed #eb6666;
     height: calc(100% - 85px);
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
 }
 
 #empty-lesson-icon {
@@ -147,6 +151,7 @@
 
 /* LESSONS */
 #body-wrapper {
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -170,13 +175,17 @@
     height: 100vh;
     background: #000000c7;
     display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-direction: column;
+        flex-direction: column;
     color: #ffffff;
 }
 
 #overlay.active, #file-preview-overlay.active {
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -277,6 +286,7 @@
 }
 
 #file-section-2 {
+    display: -ms-flexbox;
     display: flex;
     padding: 10px;
 }
@@ -313,6 +323,7 @@
 }
 
 #file-section-3 {
+    display: -ms-flexbox;
     display: flex;
     padding: 10px;
 }
@@ -328,6 +339,7 @@
 }
 
 #file-section-4 {
+    display: -ms-flexbox;
     display: flex;
     padding: 10px 0 20px;
 }
@@ -338,6 +350,7 @@
 }
 
 #file-section-5 {
+    display: -ms-flexbox;
     display: flex;
     padding: 10px;
 }
@@ -466,4 +479,154 @@
 
 #edit-button, #delete-button {
     display: none;
+}#admin #lesson-list-wrapper {
+    margin: 0 auto;
+    width: calc(100vw - 500px);
+    min-width: 700px;
+    height: calc(100vh - 88px);
+    box-shadow: inset 0 0 4px 1px rgba(141, 141, 141, 0.2), 0 3px 24px rgba(100, 100, 100, 0.2);
+    padding: 0 45px;
 }
+
+#activity-wrapper {
+    width: 300px;
+    margin: 0 auto;
+    box-shadow: inset 0 0 4px 1px rgba(141, 141, 141, 0.2), 0 3px 24px rgba(100, 100, 100, 0.2);
+    padding: 0 10px;
+}
+
+#activity-table {
+    width: 100%;
+}
+
+#activity-table thead {
+    color: #45eced;
+    font-size: 14px;
+}
+
+#activity-table tbody tr {
+    text-align: center;
+    height: 52px;
+    background: #151515;
+    color: #ffffff;
+}
+
+#activity-table tbody tr td {
+    height: 65px;
+}
+
+#activity-table .action-wrapper {
+    width: 175px;
+}
+
+.action-wrapper button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 18px;
+    transition: all 150ms ease-out;
+}
+
+.action-wrapper button:hover {
+    font-size: 21px;
+}
+
+#activity-table .tag {
+    font-size: 13px;
+    padding: 3px 8px;
+    margin-top: 10px;
+}
+
+/*EMPTY ACTIVITY*/
+
+#empty-activity-wrapper {
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: center;
+        justify-content: center;
+    height: calc(100% - 83px);
+    color: #ff7474;
+}
+
+#activity-text {
+    font-size: 19px;
+    color: white;
+}
+
+/*EMPTY ACTIVITY*/
+
+#admin #edit-button {
+    display: inline-block;
+    color: #ffff73;
+}
+
+#admin #delete-button {
+    display: inline-block;
+    color: #f67272;
+}
+
+/*EDIT*/
+#overlay.edit {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.edit #dragover-wrapper {
+    display: none;
+}
+
+.edit #upload-wrapper {
+    display: block;
+}
+
+/*EDIT*/
+
+/*DELETE*/
+#overlay.delete {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+#delete-wrapper {
+    display: none;
+}
+
+.delete #dragover-wrapper {
+    display: none;
+}
+
+.delete #delete-wrapper {
+    display: block;
+}
+
+#delete-wrapper {
+    background: #d56b6b;
+    padding: 25px;
+    width: 220px;
+}
+
+#delete-message {
+    margin: 0 0 20px 0;
+    font-size: 19px;
+}
+
+#delete-warning {
+    font-size: 13px;
+    margin: 0 0 18px 0;
+}
+
+#delete-cancel-button {
+    margin: 0 5px 0 28px;
+    color: #ff7777;
+}
+
+#delete-submit-button {
+    background: #d33333;
+    color: white;
+}
+/*DELETE*/

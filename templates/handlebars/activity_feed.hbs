@@ -1,3 +1,4 @@
+<h4>Activity Feed</h4>
 <table id="activity-table">
     <thead>
         <tr>
@@ -9,9 +10,9 @@
     <tbody>
         {{#each this}}
             <tr>
-                <td class="lesson-id">{{date}}</td>
-                <td class="lesson-name">{{name}}</td>
-                <td>{{lesson}}</td>
+                <td class="lesson-id">{{stringDate date}}</td>
+                <td class="lesson-name">{{username}}</td>
+                <td>{{name}}</td>
             </tr>
         {{/each}}
     </tbody>

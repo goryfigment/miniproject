@@ -1,4 +1,4 @@
-webpackJsonp([1],[
+webpackJsonp([0],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12059,11 +12059,13 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 /* 36 */,
 /* 37 */,
 /* 38 */,
-/* 39 */
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(5);
 __webpack_require__(11);
+__webpack_require__(41);
 __webpack_require__(6);
 __webpack_require__(12);
 var $ = __webpack_require__(3);
@@ -12071,14 +12073,24 @@ var $ = __webpack_require__(3);
 var tagTemplate = __webpack_require__(13);
 var lessonTemplate = __webpack_require__(29);
 var emptyLessonTemplate = __webpack_require__(30);
+var emptyActivityTemplate = __webpack_require__(42);
+var activityFeedTemplate = __webpack_require__(43);
 
 function init() {
     var $lessonListWrapper = $('#lesson-list-wrapper');
+    var $activityWrapper = $('#activity-wrapper');
 
     if(globals.lessons.length) {
         $lessonListWrapper.append(lessonTemplate(globals.lessons));
+        $activityWrapper.append(activityFeedTemplate(globals.lessons));
     } else {
         $lessonListWrapper.append(emptyLessonTemplate(globals.lessons));
+        $activityWrapper.append(emptyActivityTemplate(globals.lessons));
+    }
+
+    for (var i = 0; i < globals.lessons.length; i++) {
+        var currentLesson = globals.lessons[i];
+        $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
     }
 }
 
@@ -12122,6 +12134,8 @@ $(document).ready(function() {
         var $overlay = $('#overlay');
         $overlay.removeClass('active');
         $overlay.removeClass('drop');
+        $overlay.removeClass('edit');
+        $overlay.removeClass('delete');
     });
 
     $(document).on('click', 'body', function () {
@@ -12144,7 +12158,7 @@ $(document).ready(function() {
     });
 
     $('#overlay').on({
-        'dragexit dragleave': function() {
+        'dragexit dragleave': function(e) {
             $('#overlay').removeClass('active');
         },
         'drop': function(e) {
@@ -12156,7 +12170,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', '#lesson-submit-button', function () {
+    $(document).on('click', '.drop #lesson-submit-button', function () {
         var formData = new FormData();
         var $tags = $('#overlay').find('.tag');
         var tags = [];
@@ -12186,10 +12200,16 @@ $(document).ready(function() {
             success: function (response) {
                 console.log(JSON.stringify(response));
                 $('#lesson-cancel-button').click();
-                var $lessonListWrapper = $('#lesson-list-wrapper');
                 globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
                 $lessonListWrapper.empty();
                 $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
             }
         });
     });
@@ -12198,18 +12218,6 @@ $(document).ready(function() {
     //PRINT//
     $(document).on('click', '#print-button', function () {
         var file_name = $(this).attr('data-file_name');
-
-        //$.ajax({
-        //    headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-        //    url: globals.base_url + '/print/',
-        //    data: {'file_name': file_name},
-        //    dataType: 'json',
-        //    type: "POST",
-        //    success: function (response) {
-        //        //console.log(JSON.stringify(response));
-        //        printJS('/templates/bundle/assets/temporary/' + response['pdf_file']);
-        //    }
-        //});
 
         printJS('/templates/bundle/assets/lessons/' + file_name);
     });
@@ -12254,7 +12262,202 @@ $(document).ready(function() {
         $searchInput.keyup();
     });
     //SEARCH//
+
+    //EDIT//
+    $(document).on('click', '#edit-button', function (e) {
+        e.stopPropagation();
+        var $this = $(this);
+        var lesson = $this.closest('.lesson').data('lesson');
+        var $overlay = $('#overlay');
+
+        $overlay.addClass('edit');
+
+        var $tagWrapper = $('#upload-wrapper .tag-wrapper');
+        $tagWrapper.empty();
+
+        for (var t = 0; t < lesson['tags'].length; t++) {
+            $tagWrapper.append(tagTemplate({value: lesson['tags'][t]}));
+        }
+
+        $('#file-name-input').val(lesson['name']);
+        $('#program-input').val(lesson['program']);
+        $('#subject-input').val(lesson['subject']);
+        $('#level-input').val(lesson['level']);
+        $('#block-input').val(lesson['block']);
+        $('#standard-input').val(lesson['standard']);
+        $('#lesson-submit-button').attr('data-id', lesson['id']);
+
+        globals.file = null;
+    });
+
+    $(document).on('click', '.edit #lesson-submit-button', function () {
+        var formData = new FormData();
+        var $tags = $('#overlay').find('.tag');
+        var tags = [];
+
+        for (var i = 0; i < $tags.length; i++) {
+            var $currentTag = $($tags[i]);
+            tags.push($currentTag.attr('data-value'));
+        }
+
+        if (globals.file !== null) {
+            formData.append('file', globals.file);
+        }
+
+        formData.append('id', $('#lesson-submit-button').attr('data-id'));
+        formData.append('lesson_name', $('#file-name-input').val());
+        formData.append('tags', JSON.stringify(tags));
+        formData.append('program', $('#program-input').val());
+        formData.append('subject', $('#subject-input').val());
+        formData.append('level', $('#level-input').val());
+        formData.append('block', $('#block-input').val());
+        formData.append('standard', $('#standard-input').val());
+
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/edit_lesson/',
+            data: formData,
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log(JSON.stringify(response));
+                $('#lesson-cancel-button').click();
+                globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
+                $lessonListWrapper.empty();
+                $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
+            }
+        });
+    });
+    //EDIT//
+
+    //DELETE//
+    $(document).on('click', '#delete-wrapper', function (e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('click', '#delete-button', function (e) {
+        e.stopPropagation();
+        var $this = $(this);
+        var lesson = $this.closest('.lesson').data('lesson');
+        var $overlay = $('#overlay');
+
+        $('#delete-lesson-id').text(lesson['id']);
+        $('#delete-submit-button').attr('data-id', lesson['id']);
+
+        $overlay.addClass('delete');
+    });
+
+    $(document).on('click', '#delete-cancel-button', function (e) {
+        e.stopPropagation();
+        var $overlay = $('#overlay');
+        $overlay.removeClass('active');
+        $overlay.removeClass('delete');
+    });
+
+
+    $(document).on('click', '#delete-submit-button', function () {
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/delete_lesson/',
+            data: {'id': $(this).attr('data-id')},
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                $('#delete-cancel-button').click();
+                globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
+                $lessonListWrapper.empty();
+                $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
+            }
+        });
+    });
+
+    //DELETE//
 });
 
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(4);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h4>Activity Feed</h4>\r\n<div id=\"empty-activity-wrapper\">\r\n    <span id=\"empty-lesson-icon\"><i class=\"fas fa-diagnoses\"></i></span>\r\n    <span id=\"activity-text\">Looks empty in here!</span>\r\n</div>";
+},"useData":true});
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(4);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.escapeExpression, alias2=container.lambda;
+
+  return "            <tr>\r\n                <td class=\"lesson-id\">"
+    + alias1(__default(__webpack_require__(44)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.date : depth0),{"name":"stringDate","hash":{},"data":data}))
+    + "</td>\r\n                <td class=\"lesson-name\">"
+    + alias1(alias2((depth0 != null ? depth0.username : depth0), depth0))
+    + "</td>\r\n                <td>"
+    + alias1(alias2((depth0 != null ? depth0.name : depth0), depth0))
+    + "</td>\r\n            </tr>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<h4>Activity Feed</h4>\r\n<table id=\"activity-table\">\r\n    <thead>\r\n        <tr>\r\n            <th scope=\"col\">Date</th>\r\n            <th scope=\"col\">Author</th>\r\n            <th scope=\"col\">Lesson</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </tbody>\r\n</table>";
+},"useData":true});
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+module.exports = function(epoch) {
+    var dateObject = new Date(parseInt(epoch) * 1000);
+    var ampm = 'AM';
+    var day = pad(dateObject.getDate());
+    var month = pad(dateObject.getMonth()+1);
+    var year = dateObject.getFullYear();
+    var hour = pad(dateObject.getHours());
+    var min = pad(dateObject.getMinutes());
+
+    function pad(value) {
+        if(value < 10) {
+            return '0' + value;
+        } else {
+            return value;
+        }
+    }
+
+    if(hour>= 12) {
+        if(hour>12) hour -= 12;
+        ampm= 'PM';
+    }
+
+    return month + '/' + day + '/' + year + ' ' + hour + ':' + min + ampm
+};
+
 /***/ })
-],[39]);
+],[40]);

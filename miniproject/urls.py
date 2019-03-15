@@ -17,7 +17,11 @@ urlpatterns = [
     url(r'^account/change_password/$', account_handler.change_password, name='change_password'),
     url(r'^logout/$', account_handler.user_logout, name='logout'),
 
-    #Dashboard
+    # Dashboard
     url(r'^file_upload/$', dashboard.file_upload, name='file_upload'),
     url(r'^print/$', dashboard.print_pdf, name='print'),
+
+    # Admin
+    url(r'^edit_lesson/$', dashboard.edit_lesson, name='edit_lesson'),
+    url(r'^delete_lesson/$', dashboard.delete_lesson, name='delete_lesson'),
 ]

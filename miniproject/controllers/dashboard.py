@@ -76,3 +76,43 @@ def print_pdf(request):
     # word.Quit()
 
     return JsonResponse({'pdf_file': pdf_file_name}, safe=False)
+
+
+@login_required
+@data_required(['lesson_name', 'tags', 'program', 'subject', 'level', 'block', 'standard', 'id'], 'FILES')
+def edit_lesson(request):
+    lesson_id = str(request.POST['id'])
+
+    lesson = Lesson.objects.filter(id=request.POST['id'])[0]
+
+    if 'file' in request.FILES:
+        lesson_file = request.FILES['file']
+        lesson_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..', 'templates', 'bundle', 'assets', 'lessons'))
+        document = Document(lesson_file)
+        file_name = str(lesson_id) + '.docx'
+        document.save(os.path.join(lesson_path, file_name))
+        lesson.file_url = file_name
+
+    lesson.name = request.POST['lesson_name']
+    lesson.tags = json.loads(request.POST['tags'])
+    lesson.program = request.POST['program']
+    lesson.subject = request.POST['subject']
+    lesson.level = request.POST['level']
+    lesson.block = request.POST['block']
+    lesson.standard = request.POST['standard']
+
+    lesson.save()
+    lessons = models_to_dict(Lesson.objects.all())
+
+    return JsonResponse({'lesson': model_to_dict(lesson), 'lessons': lessons}, safe=False)
+
+
+@login_required
+@data_required(['id'], 'POST')
+def delete_lesson(request):
+    lesson = Lesson.objects.filter(id=request.POST['id'])[0]
+    lesson.delete()
+
+    lessons = models_to_dict(Lesson.objects.all())
+
+    return JsonResponse({'lessons': lessons}, safe=False)

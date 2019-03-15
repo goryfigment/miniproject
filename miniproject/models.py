@@ -25,8 +25,8 @@ class User(AbstractBaseUser):
     def __unicode__(self):
         return self.email
 
-    def get_short_name(self):
-        return self.first_name
+    def get_name(self):
+        return self.first_name + ' ' + self.last_name
 
     def has_perm(self, perm, obj=None):
         return self.is_superuser
@@ -49,6 +49,9 @@ class Lesson(models.Model):
     level = models.IntegerField()
     block = models.IntegerField()
     standard = models.IntegerField()
+
+    def get_name(self):
+        return self.creator.first_name + ' ' + self.creator.last_name
 
     class Meta:
         db_table = "lesson"
