@@ -12025,7 +12025,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.standard || (depth0 != null ? depth0.standard : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"standard","hash":{},"data":data}) : helper)))
     + "</td>\r\n                <td class=\"action-wrapper\">\r\n                    <button id=\"print-button\" title=\"Print\" data-file_name=\""
     + alias4(((helper = (helper = helpers.file_url || (depth0 != null ? depth0.file_url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"file_url","hash":{},"data":data}) : helper)))
-    + "\"><i class=\"fas fa-print\"></i></button>\r\n                    <a href=\"/templates/bundle/assets/lessons/"
+    + "\" style=\"display: none\"><i class=\"fas fa-print\"></i></button>\r\n                    <a href=\"/templates/bundle/assets/lessons/"
     + alias4(((helper = (helper = helpers.file_url || (depth0 != null ? depth0.file_url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"file_url","hash":{},"data":data}) : helper)))
     + "\"><button id=\"download-button\" title=\"Download\"><i class=\"fas fa-file-download\"></i></button></a>\r\n                    <button id=\"edit-button\" title=\"Edit\"><i class=\"fas fa-edit\"></i></button>\r\n                    <button id=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
