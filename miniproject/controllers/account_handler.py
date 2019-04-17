@@ -16,35 +16,42 @@ from miniproject.models import User
 from miniproject.settings_secret import GMAIL, GMAIL_PASSWORD
 
 
-@data_required(['username', 'email', 'password', 'first_name', 'last_name'], 'POST')
+@data_required(['username', 'email', 'code', 'password', 'first_name', 'last_name'], 'POST')
 def register(request):
     username = request.POST['username'].strip().lower()
+    code = str(request.POST['code'].strip())
     email = request.POST['email'].strip().lower()
     password = request.POST['password']
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
 
+    # Check code
+    if not code:
+        data = {'success': False,  'error_msg': 'Must have an access code.'}
+        return HttpResponseBadRequest(json.dumps(data), 'application/json')
+
     # Check first name
     if not len(first_name):
-        print username
         data = {'success': False,  'error_msg': 'Must have a first name.'}
         return HttpResponseBadRequest(json.dumps(data), 'application/json')
 
     # Check last name
     if not len(last_name):
-        print username
         data = {'success': False,  'error_msg': 'Must have a last name.'}
         return HttpResponseBadRequest(json.dumps(data), 'application/json')
 
     # Check username
     if len(username) <= 2 or len(username) >= 16:
-        print username
         data = {'success': False,  'error_msg': 'Username must be between 3 to 15 characters.'}
         return HttpResponseBadRequest(json.dumps(data), 'application/json')
 
     # Check Email
     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
         data = {'success': False,  'error_msg': 'Invalid email.'}
+        return HttpResponseBadRequest(json.dumps(data), 'application/json')
+
+    if code == '' or int(code) != 729:
+        data = {'success': False,  'error_msg': 'Invalid access code.'}
         return HttpResponseBadRequest(json.dumps(data), 'application/json')
 
     # Check if valid password: Must be 8 or more characters and contain a combo of letters and numbers

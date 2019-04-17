@@ -1,0 +1,17 @@
+.sortable {
+    cursor: pointer;
+}
+
+.sortable:not(.ascending):not(.descending):after {
+    content: "\25B4\25BE";
+    padding-left: 3px;
+    letter-spacing: -4px;
+}
+
+.sortable.ascending:after{
+    content: "\25BE";
+}
+
+.sortable.descending:after{
+    content: "\25B4";
+}

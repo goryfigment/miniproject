@@ -20,6 +20,7 @@ urlpatterns = [
     # Dashboard
     url(r'^file_upload/$', dashboard.file_upload, name='file_upload'),
     url(r'^print/$', dashboard.print_pdf, name='print'),
+    url(r'^doc_creator/$', dashboard.create_doc, name='create_doc'),
 
     # Admin
     url(r'^edit_lesson/$', dashboard.edit_lesson, name='edit_lesson'),

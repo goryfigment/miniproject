@@ -45,7 +45,7 @@ class Lesson(models.Model):
     file_url = models.CharField(max_length=100)
     tags = JSONField()
     program = models.CharField(choices=(('ELAA', 'ELAA'), ('GED', 'GED')), max_length=255, default='ELAA')
-    subject = models.CharField(max_length=100)
+    subject = JSONField()
     level = models.IntegerField()
     block = models.IntegerField()
     standard = models.IntegerField()

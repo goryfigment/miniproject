@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10261,12 +10261,12 @@ return jQuery;
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(5);
-__webpack_require__(34);
-var $ = __webpack_require__(3);
+__webpack_require__(35);
+var $ = __webpack_require__(2);
 
 function init() {
     $('#username').focus();
@@ -10288,6 +10288,7 @@ $(document).ready(function() {
         var username = $('#username').val();
         var password = $('#password').val();
         var email = $('#email').val();
+        var code = String($('#code').val());
         var firstName = $('#first-name').val();
         var lastName = $('#last-name').val();
 
@@ -10321,10 +10322,10 @@ $(document).ready(function() {
             $error.show();
         }
 
-
         var postData = {
             'username': username,
             'email': email,
+            'code': code,
             'password': password,
             'first_name': firstName,
             'last_name': lastName
@@ -10343,8 +10344,18 @@ $(document).ready(function() {
                 console.log(JSON.stringify(response.responseJSON));
                 var error = response.responseJSON['error_msg'];
 
+                if (error == 'Must have an access code.') {
+                    var $error = $('.error.code');
+                    $error.text(error);
+                    $error.show();
+                } else if(error == 'Invalid access code.') {
+                    $error = $('.error.code');
+                    $error.text(error);
+                    $error.show();
+                }
+
                 if (error == 'Username must be between 3 to 15 characters.') {
-                    var $error = $('.error.username');
+                    $error = $('.error.code');
                     $error.text(error);
                     $error.show();
                 } else if(error == 'Username exists.') {
@@ -10390,11 +10401,11 @@ $(document).ready(function() {
 
 /***/ }),
 
-/***/ 34:
+/***/ 35:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
 
-},[33]);
+},[34]);

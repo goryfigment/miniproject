@@ -2,13 +2,13 @@
 <table id="lesson-table">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Lesson Name</th>
-            <th scope="col">Program</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Level</th>
-            <th scope="col">Block</th>
-            <th scope="col">Standard</th>
+            <th class="sortable ascending" scope="col">ID</th>
+            <th class="sortable" scope="col">Author</th>
+            <th class="sortable" scope="col">Lesson Name</th>
+            <th class="sortable" scope="col">Program</th>
+            <th class="sortable" scope="col">Subject</th>
+            <th class="sortable" scope="col">Level</th>
+            <th class="sortable" scope="col">Block</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -16,6 +16,7 @@
         {{#each this}}
             <tr class="lesson" data-id="{{id}}">
                 <td class="lesson-id">{{id}}</td>
+                <td>{{username}}</td>
                 <td class="lesson-name">
                     {{name}}
                     <div class="tag-wrapper">
@@ -23,10 +24,9 @@
                     </div>
                 </td>
                 <td>{{program}}</td>
-                <td>{{subject}}</td>
+                <td>{{#each subject}}<div class="lesson-item" data-value="{{this}}">{{this}}</div>{{/each}}</td>
                 <td>{{level}}</td>
                 <td>{{block}}</td>
-                <td>{{standard}}</td>
                 <td class="action-wrapper">
                     <button id="print-button" title="Print" data-file_name="{{file_url}}" style="display: none"><i class="fas fa-print"></i></button>
                     <a href="/templates/bundle/assets/lessons/{{file_url}}"><button id="download-button" title="Download"><i class="fas fa-file-download"></i></button></a>

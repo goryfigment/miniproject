@@ -25,14 +25,14 @@
             <form autocomplete="off">
                 <h2>Register</h2>
                 {% csrf_token %}
-                <div class="input-container">
-                    <label for="email">Email</label>
-                    <input id="email" type="text" />
-                </div>
-                <div class="error email"></div>
 
                 <div id="input-wrapper">
                     <div id="section-1">
+                        <div class="input-container">
+                            <label for="email">Email</label>
+                            <input id="email" type="text" />
+                        </div>
+                        <div class="error email"></div>
                         <div class="input-container">
                             <label for="username">Username</label>
                             <input id="username" type="text" />
@@ -46,6 +46,11 @@
                     </div>
 
                     <div id="section-2">
+                        <div class="input-container">
+                            <label for="code">Access Code</label>
+                            <input id="code" type="text" />
+                        </div>
+                        <div class="error code"></div>
                         <div class="input-container">
                             <label for="first-name">First Name</label>
                             <input id="first-name" type="text" />

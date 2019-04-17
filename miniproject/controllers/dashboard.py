@@ -1,5 +1,8 @@
+from __future__ import print_function
+from mailmerge import MailMerge
+from datetime import date
 import json, os
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.http import JsonResponse
 from miniproject.decorators import login_required, data_required
 from miniproject.models import Lesson
 from django.forms.models import model_to_dict
@@ -16,7 +19,7 @@ def file_upload(request):
     lesson_name = request.POST['lesson_name']
     tags = json.loads(request.POST['tags'])
     program = request.POST['program']
-    subject = request.POST['subject']
+    subject = json.loads(request.POST['subject'])
     level = request.POST['level']
     block = request.POST['block']
     standard = request.POST['standard']
@@ -42,9 +45,17 @@ def file_upload(request):
     lesson_obj.file_url = file_name
     lesson_obj.save()
 
-    lessons = models_to_dict(Lesson.objects.all())
+    lessons = Lesson.objects.all()
 
-    return JsonResponse({'lesson': model_to_dict(lesson_obj), 'lessons': lessons}, safe=False)
+    lesson_list = []
+
+    for lesson in lessons:
+        full_name = lesson.get_name()
+        lesson = model_to_dict(lesson)
+        lesson['username'] = full_name
+        lesson_list.append(lesson)
+
+    return JsonResponse({'lessons': lesson_list}, safe=False)
 
 
 @login_required
@@ -96,15 +107,22 @@ def edit_lesson(request):
     lesson.name = request.POST['lesson_name']
     lesson.tags = json.loads(request.POST['tags'])
     lesson.program = request.POST['program']
-    lesson.subject = request.POST['subject']
+    lesson.subject = json.loads(request.POST['subject'])
     lesson.level = request.POST['level']
     lesson.block = request.POST['block']
     lesson.standard = request.POST['standard']
 
     lesson.save()
-    lessons = models_to_dict(Lesson.objects.all())
+    lessons = Lesson.objects.all()
+    lesson_list = []
 
-    return JsonResponse({'lesson': model_to_dict(lesson), 'lessons': lessons}, safe=False)
+    for lesson in lessons:
+        full_name = lesson.get_name()
+        lesson = model_to_dict(lesson)
+        lesson['username'] = full_name
+        lesson_list.append(lesson)
+
+    return JsonResponse({'lessons': lesson_list}, safe=False)
 
 
 @login_required
@@ -113,6 +131,81 @@ def delete_lesson(request):
     lesson = Lesson.objects.filter(id=request.POST['id'])[0]
     lesson.delete()
 
-    lessons = models_to_dict(Lesson.objects.all())
+    lessons = Lesson.objects.all()
+    lesson_list = []
 
-    return JsonResponse({'lessons': lessons}, safe=False)
+    for lesson in lessons:
+        full_name = lesson.get_name()
+        lesson = model_to_dict(lesson)
+        lesson['username'] = full_name
+        lesson_list.append(lesson)
+
+    return JsonResponse({'lessons': lesson_list}, safe=False)
+
+
+@login_required
+@data_required(['name'], 'BODY')
+def create_doc(request):
+    document = MailMerge(os.path.abspath(os.path.join(os.path.dirname( __file__ ), 'lvmc_template.docx')))
+
+    document.merge(
+        Name=request.BODY['name'],
+        Date=date.today().strftime('%m/%d/%y'),
+
+        ABE1=request.BODY['abe-1'],
+        ABE2=request.BODY['abe-2'],
+        ABE3=request.BODY['abe-3'],
+        ABE4=request.BODY['abe-4'],
+        ABE5=request.BODY['abe-5'],
+        ABE6=request.BODY['abe-6'],
+
+        ELAA1=request.BODY['elaa-1'],
+        ELAA2=request.BODY['elaa-2'],
+        ELAA3=request.BODY['elaa-3'],
+        ELAA4=request.BODY['elaa-4'],
+        ELAA5=request.BODY['elaa-5'],
+        ELAA6=request.BODY['elaa-6'],
+
+        ABE_R=request.BODY['abe-r'],
+        ABE_S=request.BODY['abe-s'],
+        ABE_W=request.BODY['abe-w'],
+        ABE_SS=request.BODY['abe-ss'],
+        ABE_M=request.BODY['abe-m'],
+
+        ELAA_L=request.BODY['elaa-l'],
+        ELAA_R=request.BODY['elaa-r'],
+        ELAA_S=request.BODY['elaa-s'],
+        ELAA_W=request.BODY['elaa-w'],
+
+        LessonTitle=request.BODY['lesson-title'],
+        Introduction=request.BODY['introduction'],
+        InputModeling=request.BODY['input-modeling'],
+        Understanding=request.BODY['understanding'],
+        IndependentPractice=request.BODY['practice'],
+        Closure=request.BODY['closure'],
+        ExtendedLearning=request.BODY['extended-learning'],
+        Proficiency=request.BODY['assessment'],
+        UDL=request.BODY['udl'],
+        Reflection1=request.BODY['work'],
+        Reflection2=request.BODY['add']
+    )
+
+    document.merge_rows('Standards', request.BODY['addressed'])
+    document.merge_rows('Objective', request.BODY['objective'])
+    document.merge_rows('Resources', request.BODY['resource'])
+
+    document_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..', 'templates', 'bundle', 'assets', 'document'))
+
+    # Delete all files in temporary folder
+    for the_file in os.listdir(document_path):
+        file_path = os.path.join(document_path, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(e)
+
+    doc_file = os.path.join(document_path, request.BODY['lesson-title'] + '.docx')
+    document.write(doc_file)
+
+    return JsonResponse({'doc': request.BODY['lesson-title'] + '.docx'}, safe=False)
