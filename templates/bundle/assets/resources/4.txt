@@ -1,0 +1,11 @@
+1. add reflection checkbox/dialog - DONE
+2. resolution check - DONE
+3. checkbox for levels - DONE
+4. new webpage (resources) - name, filename, download/url
+5. upload pdf - DONE
+
+
+1. Check if admin
+2. Edit/Delete both files/links
+3. Test everything
+4. Reupdate database

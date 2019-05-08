@@ -54,6 +54,10 @@ $(document).ready(function() {
         window.location.replace(globals.base_url + '/logout');
     });
 
+    $(document).on('click', '#resources-link', function () {
+        window.location.replace(globals.base_url + '/resources');
+    });
+
     $(document).on('keyup', '#tag-input', function (e) {
         var keycode = e.keyCode;
 
@@ -70,13 +74,14 @@ $(document).ready(function() {
     });
 
     //OVERLAY//
-    $(document).on('click', 'body, #lesson-cancel-button, #doc-cancel-button', function () {
+    $(document).on('click', 'body, #lesson-cancel-button, #doc-cancel-button, #reflection-cancel-button', function () {
         var $overlay = $('#overlay');
         $overlay.removeClass('active');
         $overlay.removeClass('drop');
         $overlay.removeClass('document');
         $overlay.removeClass('edit');
         $overlay.removeClass('delete');
+        $overlay.removeClass('reflection');
     });
 
     $(document).on('click', 'body', function () {
@@ -109,26 +114,28 @@ $(document).ready(function() {
             var file = e.originalEvent.dataTransfer.files[0];
             var fileType = file.type;
 
-            if(fileType == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || fileType == 'application/msword') {
+            if(fileType == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || fileType == 'application/msword' || fileType == 'application/pdf') {
                 $('#overlay').addClass('drop');
                 globals.file = file;
             } else {
-                alert('This file must be doc or docx!');
+                alert('This file must be doc, docx, or pdf!');
             }
         }
     });
 
     $(document).on('click', '#lesson-submit-button', function () {
-        var $overlay = $('#overlay');
-        if($overlay.hasClass('edit')) {
+        if($(this).closest('.edit').length) {
             return;
         }
 
         var formData = new FormData();
-        var $tags = $overlay.find('.tag');
+        var $tags = $('#overlay').find('.tag');
         var $subjects = $('#file-section-3 input');
+        var $levels = $('#level-wrapper input');
         var tags = [];
         var subjects = [];
+        var levels = [];
+        var fileType = 'docx';
 
         for (var i = 0; i < $tags.length; i++) {
             var $currentTag = $($tags[i]);
@@ -143,12 +150,25 @@ $(document).ready(function() {
             }
         }
 
+        for (var l = 0; l < $levels.length; l++) {
+            var $currentLevel = $($levels[l]);
+
+            if($currentLevel.prop(("checked"))) {
+                levels.push($currentLevel.val());
+            }
+        }
+
+        if(globals.file.type == 'application/pdf') {
+            fileType = 'pdf';
+        }
+
         formData.append('file', globals.file);
+        formData.append('file_type', fileType);
         formData.append('lesson_name', $('#file-name-input').val());
         formData.append('tags', JSON.stringify(tags));
         formData.append('program', $('#program-input').val());
         formData.append('subject', JSON.stringify(subjects));
-        formData.append('level', $('#level-input').val());
+        formData.append('level', JSON.stringify(levels));
         formData.append('block', $('#block-input').val());
         formData.append('standard', $('#standard-input').val());
 
@@ -168,14 +188,14 @@ $(document).ready(function() {
                 $lessonListWrapper.empty();
                 $lessonListWrapper.append(lessonTemplate(globals.lessons));
 
+                var $overlay = $('#overlay');
+                $overlay.empty();
+                $overlay.append(overlayTemplate({}));
+
                 for (var i = 0; i < globals.lessons.length; i++) {
                     var currentLesson = globals.lessons[i];
                     $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
                 }
-
-                var $overlay = $('#overlay');
-                $overlay.empty();
-                $overlay.append(overlayTemplate({}));
             }
         });
     });
@@ -392,6 +412,10 @@ $(document).ready(function() {
             $('#file-section-3 input[value="' + lesson['subject'][l] + '"]').prop('checked', true);
         }
 
+        for (var s = 0; s < lesson['level'].length; s++) {
+            $('#file-section-4 input[value="' + lesson['level'][s] + '"]').prop('checked', true);
+        }
+
         $('#file-name-input').val(lesson['name']);
         $('#program-input').val(lesson['program']);
         $('#level-input').val(lesson['level']);
@@ -406,8 +430,10 @@ $(document).ready(function() {
         var formData = new FormData();
         var $tags = $('#overlay').find('.tag');
         var $subjects = $('#file-section-3 input');
+        var $levels = $('#level-wrapper input');
         var tags = [];
         var subjects = [];
+        var levels = [];
 
         for (var i = 0; i < $tags.length; i++) {
             var $currentTag = $($tags[i]);
@@ -422,6 +448,14 @@ $(document).ready(function() {
             }
         }
 
+        for (var l = 0; l < $levels.length; l++) {
+            var $currentLevel = $($levels[l]);
+
+            if($currentLevel.prop(("checked"))) {
+                levels.push($currentLevel.val());
+            }
+        }
+
         if (globals.file !== null) {
             formData.append('file', globals.file);
         }
@@ -431,7 +465,7 @@ $(document).ready(function() {
         formData.append('tags', JSON.stringify(tags));
         formData.append('program', $('#program-input').val());
         formData.append('subject', JSON.stringify(subjects));
-        formData.append('level', $('#level-input').val());
+        formData.append('level', JSON.stringify(levels));
         formData.append('block', $('#block-input').val());
         formData.append('standard', $('#standard-input').val());
 
@@ -470,6 +504,53 @@ $(document).ready(function() {
     });
     //EDIT//
 
+    //REFLECTION//
+    $(document).on('click', '.reflection-icon', function (e) {
+        e.stopPropagation();
+        var $overlay = $('#overlay');
+        $overlay.addClass('active');
+        $overlay.addClass('reflection');
+
+        var lesson = $(this).closest('.lesson').data('lesson');
+        $('#reflection-1-input').val(lesson['lesson_work']);
+        $('#reflection-2-input').val(lesson['add_or_take']);
+
+        $('#reflection-submit-button').attr('data-id', lesson['id']);
+    });
+
+    $(document).on('click', '#reflection-wrapper', function (e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('click', '#reflection-submit-button', function () {
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/reflection/',
+            data: {'id': $(this).attr('data-id'), 'lesson_work': $('#reflection-1-input').val().trim(), 'add_or_take': $('#reflection-2-input').val().trim()},
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                $('#reflection-cancel-button').click();
+                globals.lessons = response['lessons'];
+
+                var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
+
+                $lessonListWrapper.empty();
+                $lessonListWrapper.append(lessonTemplate(globals.lessons));
+
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
+
+                for (var i = 0; i < globals.lessons.length; i++) {
+                    var currentLesson = globals.lessons[i];
+                    $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
+                }
+            }
+        });
+    });
+    //REFLECTION//
+
     //DELETE//
     $(document).on('click', '#delete-wrapper', function (e) {
         e.stopPropagation();
@@ -493,7 +574,6 @@ $(document).ready(function() {
         $overlay.removeClass('active');
         $overlay.removeClass('delete');
     });
-
 
     $(document).on('click', '#delete-submit-button', function () {
         $.ajax({

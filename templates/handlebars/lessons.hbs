@@ -9,6 +9,7 @@
             <th class="sortable" scope="col">Subject</th>
             <th class="sortable" scope="col">Level</th>
             <th class="sortable" scope="col">Block</th>
+            <th class="sortable" scope="col">Reflection</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -25,11 +26,12 @@
                 </td>
                 <td>{{program}}</td>
                 <td>{{#each subject}}<div class="lesson-item" data-value="{{this}}">{{this}}</div>{{/each}}</td>
-                <td>{{level}}</td>
+                <td>{{replaceAll level ',' ', '}}</td>
                 <td>{{block}}</td>
+                <td>{{#ifCond lesson_work '==' ''}}{{#ifCond add_or_take '==' ''}}<span style="display: none">1</span><span id="x-mark" class="reflection-icon"><i class="fas fa-times"></i></span>{{else}}<span style="display: none">2</span><span id="check-mark" class="reflection-icon"><i class="fas fa-check"></i></span>{{/ifCond}}{{else}}<span style="display: none">2</span><span id="check-mark" class="reflection-icon"><i class="fas fa-check"></i></span>{{/ifCond}}</td>
                 <td class="action-wrapper">
                     <button id="print-button" title="Print" data-file_name="{{file_url}}" style="display: none"><i class="fas fa-print"></i></button>
-                    <a href="/templates/bundle/assets/lessons/{{file_url}}"><button id="download-button" title="Download"><i class="fas fa-file-download"></i></button></a>
+                    <a href="/templates/bundle/assets/lessons/{{file_url}}" download><button id="download-button" title="Download"><i class="fas fa-file-download"></i></button></a>
                     <button id="edit-button" title="Edit"><i class="fas fa-edit"></i></button>
                     <button id="delete-button" title="Delete"><i class="fas fa-trash"></i></button>
                 </td>

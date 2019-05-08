@@ -6,14 +6,12 @@ function replaceAll(str, find, replace) {
 
 function comparer(index) {
     return function(a, b) {
-        var valA = parseFloat(replaceAll(getCellValue(a, index),',', '')), valB = parseFloat(replaceAll(getCellValue(b, index), ',', ''));
-        return valA - valB;
+        var valA = getCellValue(a, index), valB = getCellValue(b, index);
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
     }
 }
 
-function getCellValue(row, index) {
-    return $(row).children('td').eq(index).html()
-}
+function getCellValue(row, index){ return $(row).children('td').eq(index).text()}
 
 $(document).ready(function() {
     $(document).on('click', '.sortable', function () {

@@ -6,12 +6,11 @@ from django.http import JsonResponse
 from miniproject.decorators import login_required, data_required
 from miniproject.models import Lesson
 from django.forms.models import model_to_dict
-from miniproject.modules.base import models_to_dict
 from docx import Document
 
 
 @login_required
-@data_required(['file', 'lesson_name', 'tags', 'program', 'subject', 'level', 'block', 'standard'], 'FILES')
+@data_required(['file', 'lesson_name', 'tags', 'program', 'subject', 'level', 'block', 'standard', 'file_type'], 'FILES')
 def file_upload(request):
     current_user = request.user
 
@@ -20,13 +19,11 @@ def file_upload(request):
     tags = json.loads(request.POST['tags'])
     program = request.POST['program']
     subject = json.loads(request.POST['subject'])
-    level = request.POST['level']
+    level = json.loads(request.POST['level'])
     block = request.POST['block']
     standard = request.POST['standard']
-
+    file_type = request.POST['file_type']
     lesson_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..', 'templates', 'bundle', 'assets', 'lessons'))
-
-    document = Document(lesson_file)
 
     # Create Lesson in DATABASE
     lesson_obj = Lesson.objects.create(
@@ -40,10 +37,18 @@ def file_upload(request):
         standard=standard
     )
 
-    file_name = str(lesson_obj.id) + '.docx'
-    document.save(os.path.join(lesson_path, file_name))
-    lesson_obj.file_url = file_name
-    lesson_obj.save()
+    file_name = str(lesson_obj.id) + '.' + file_type
+
+    try:
+        with open(os.path.join(lesson_path, file_name), 'wb+') as f:
+            for chunk in lesson_file.chunks():
+                f.write(chunk)
+
+        lesson_obj.file_url = file_name
+        lesson_obj.save()
+    except:
+        print('Oh no file upload is messed up!')
+        lesson_obj.delete()
 
     lessons = Lesson.objects.all()
 
@@ -108,7 +113,7 @@ def edit_lesson(request):
     lesson.tags = json.loads(request.POST['tags'])
     lesson.program = request.POST['program']
     lesson.subject = json.loads(request.POST['subject'])
-    lesson.level = request.POST['level']
+    lesson.level = json.loads(request.POST['level'])
     lesson.block = request.POST['block']
     lesson.standard = request.POST['standard']
 
@@ -129,7 +134,34 @@ def edit_lesson(request):
 @data_required(['id'], 'POST')
 def delete_lesson(request):
     lesson = Lesson.objects.filter(id=request.POST['id'])[0]
+    file_name = lesson.file_url
     lesson.delete()
+
+    try:
+        os.remove(os.path.join(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..', 'templates', 'bundle', 'assets', 'lessons')), file_name))
+    except OSError:
+        print('Could not find file: ' + file_name)
+        pass
+
+    lessons = Lesson.objects.all()
+    lesson_list = []
+
+    for lesson in lessons:
+        full_name = lesson.get_name()
+        lesson = model_to_dict(lesson)
+        lesson['username'] = full_name
+        lesson_list.append(lesson)
+
+    return JsonResponse({'lessons': lesson_list}, safe=False)
+
+
+@login_required
+@data_required(['id', 'lesson_work', 'add_or_take'], 'POST')
+def reflection(request):
+    lesson = Lesson.objects.filter(id=request.POST['id'])[0]
+    lesson.lesson_work = request.POST['lesson_work']
+    lesson.add_or_take = request.POST['add_or_take']
+    lesson.save()
 
     lessons = Lesson.objects.all()
     lesson_list = []

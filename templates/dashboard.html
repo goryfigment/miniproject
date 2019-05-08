@@ -23,7 +23,8 @@
         </div>
         <button id="create-document-button"><i class="fas fa-file-word"></i><span id="plus-span"><i class="fas fa-plus"></i></span></button>
         <div id="nav-wrapper">
-            <span class="nav-links" id="home-link">Home</span>
+            <span class="nav-links" id="home-link">Dashboard</span>
+            <span class="nav-links" id="resources-link">Resources</span>
             <span class="nav-links" id="account-link">Account</span>
             <div id="account-wrapper">
                 <div>{{ name }}
@@ -148,31 +149,69 @@
 
                     <div id="file-section-4">
                         <div>
-                            <label for="level-input">Level</label>
-                            <select id="level-input">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        </div>
-                        <div>
                             <label for="block-input">Block</label>
                             <select id="block-input">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div id="level-wrapper">
+                            <label>Level</label>
+                            <input type="checkbox" id="level-1-checkbox" data-type="columns" class="checkbox-input column-filter" value="1" style="display: none">
+                            <label for="level-1-checkbox" class="check-box-wrapper">
+                                <span class="check-box">
+                                    <svg width="12px" height="10px">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </span>
+                                <span class="check-box-label">1</span>
+                            </label>
+                            <input type="checkbox" id="level-2-checkbox" data-type="columns" class="checkbox-input column-filter" value="2" style="display: none">
+                            <label for="level-2-checkbox" class="check-box-wrapper">
+                                <span class="check-box">
+                                    <svg width="12px" height="10px">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </span>
+                                <span class="check-box-label">2</span>
+                            </label>
+                            <input type="checkbox" id="level-3-checkbox" data-type="columns" class="checkbox-input column-filter" value="3" style="display: none">
+                            <label for="level-3-checkbox" class="check-box-wrapper">
+                                <span class="check-box">
+                                    <svg width="12px" height="10px">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </span>
+                                <span class="check-box-label">3</span>
+                            </label> <br/>
+                            <input type="checkbox" id="level-4-checkbox" data-type="columns" class="checkbox-input column-filter" value="4" style="display: none">
+                            <label for="level-4-checkbox" class="check-box-wrapper">
+                                <span class="check-box">
+                                    <svg width="12px" height="10px">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </span>
+                                <span class="check-box-label">4</span>
+                            </label>
+                            <input type="checkbox" id="level-5-checkbox" data-type="columns" class="checkbox-input column-filter" value="5" style="display: none">
+                            <label for="level-5-checkbox" class="check-box-wrapper">
+                                <span class="check-box">
+                                    <svg width="12px" height="10px">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </span>
+                                <span class="check-box-label">5</span>
+                            </label>
                         </div>
                         <div>
                             <label for="standard-input">Standard</label>
@@ -516,6 +555,27 @@
                 <button id="doc-submit-button">Submit</button>
             </div>
 
+        </div>
+
+        <div id="reflection-wrapper">
+            <div id="reflection-container">
+                <div id="reflection-details-wrapper">
+                    <div id="reflection-section-1">
+                        <span id="reflection-icon"><i class="fab fa-pied-piper-alt"></i></span>
+                        <label>After Lesson Reflection</label>
+                    </div>
+                    <div id="reflection-section-2">
+                        <label for="reflection-1-input">Did the lesson work?</label>
+                        <textarea id="reflection-1-input"></textarea>
+                        <label for="reflection-2-input">What would you add or take away?</label>
+                        <textarea id="reflection-2-input"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div id="reflection-submit-wrapper">
+                <button id="reflection-cancel-button">Cancel</button>
+                <button id="reflection-submit-button">Submit</button>
+            </div>
         </div>
     </div>
 </body>

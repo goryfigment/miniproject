@@ -1,4 +1,4 @@
-webpackJsonp([1],[
+webpackJsonp([2],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12016,169 +12016,15 @@ module.exports = exports['default'];
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-module.exports = function(v1, operator, v2, options) {
-    switch (operator) {
-        case '==':
-            return (v1 == v2) ? options.fn(this) : options.inverse(this);
-        case '===':
-            return (v1 === v2) ? options.fn(this) : options.inverse(this);
-        case '<':
-            return (v1 < v2) ? options.fn(this) : options.inverse(this);
-        case '<=':
-            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-        case '>':
-            return (v1 > v2) ? options.fn(this) : options.inverse(this);
-        case '>=':
-            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-        case '&&':
-            return (v1 && v2) ? options.fn(this) : options.inverse(this);
-        case '||':
-            return (v1 || v2) ? options.fn(this) : options.inverse(this);
-        case '!=':
-            return (v1 != v2) ? options.fn(this) : options.inverse(this);
-        default:
-            return options.inverse(this);
-    }
-};
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.printJS=t():e.printJS=t()}(window,function(){return function(n){var o={};function r(e){if(o[e])return o[e].exports;var t=o[e]={i:e,l:!1,exports:{}};return n[e].call(t.exports,t,t.exports,r),t.l=!0,t.exports}return r.m=n,r.c=o,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)r.d(n,o,function(e){return t[e]}.bind(null,o));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=4)}([function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=i(n(2)),r=i(n(3));function i(e){return e&&e.__esModule?e:{default:e}}var a={send:function(r,e){document.getElementsByTagName("body")[0].appendChild(e);var a=document.getElementById(r.frameId);"pdf"===r.type&&(o.default.isIE()||o.default.isEdge())?a.setAttribute("onload",d(a,r)):e.onload=function(){if("pdf"===r.type)d(a,r);else{var e=a.contentWindow||a.contentDocument;if(e.document&&(e=e.document),e.body.innerHTML=r.htmlData,"pdf"!==r.type&&null!==r.style){var t=document.createElement("style");t.innerHTML=r.style,e.head.appendChild(t)}"image"===r.type?(n=e,o=r,i=[],o.printable.forEach(function(e,t){return i.push((o=n,r=t,new Promise(function(n){!function e(){var t=o?o.getElementById("printableImage"+r):null;t&&void 0!==t.naturalWidth&&0!==t.naturalWidth?n():setTimeout(e,500)}()})));var o,r}),Promise.all(i)).then(function(){d(a,r)}):d(a,r)}var n,o,i}}};function d(e,t){try{!function(t,e){if(t.focus(),o.default.isEdge()||o.default.isIE())try{t.contentWindow.document.execCommand("print",!1,null)}catch(e){t.contentWindow.print()}else t.contentWindow.print()}(e)}catch(e){t.onError(e)}finally{!function(t){if(t.showModal&&r.default.close(),t.onLoadingEnd&&t.onLoadingEnd(),(t.showModal||t.onLoadingStart)&&window.URL.revokeObjectURL(t.printable),t.onPrintDialogClose){var n="mouseover";(o.default.isChrome()||o.default.isFirefox())&&(n="focus"),window.addEventListener(n,function e(){window.removeEventListener(n,e),t.onPrintDialogClose()})}}(t)}}t.default=a},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function c(e,t){var n=document.defaultView||window,o="",r=n.getComputedStyle(e,"");return Object.keys(r).map(function(e){(-1!==t.targetStyles.indexOf("*")||-1!==t.targetStyle.indexOf(r[e])||function(e,t){for(var n=0;n<e.length;n++)if("object"===(void 0===t?"undefined":i(t))&&-1!==t.indexOf(e[n]))return!0;return!1}(t.targetStyles,r[e]))&&r.getPropertyValue(r[e])&&(o+=r[e]+":"+r.getPropertyValue(r[e])+";")}),o+="max-width: "+t.maxWidth+"px !important;"+t.font_size+" !important;"}t.addWrapper=function(e,t){return'<div style="font-family:'+t.font+" !important; font-size: "+t.font_size+' !important; width:100%;">'+e+"</div>"},t.capitalizePrint=function(e){return e.charAt(0).toUpperCase()+e.slice(1)},t.collectStyles=c,t.loopNodesCollectStyles=function e(t,n){for(var o=0;o<t.length;o++){var r=t[o];if(-1===n.ignoreElements.indexOf(r.getAttribute("id"))){var i=r.tagName;if("INPUT"===i||"TEXTAREA"===i||"SELECT"===i){var a=c(r,n),d=r.parentNode,l="SELECT"===i?document.createTextNode(r.options[r.selectedIndex].text):document.createTextNode(r.value),s=document.createElement("div");s.appendChild(l),s.setAttribute("style",a),d.appendChild(s),d.removeChild(r)}else r.setAttribute("style",c(r,n));var u=r.children;u&&u.length&&e(u,n)}else r.parentNode.removeChild(r)}},t.addHeader=function(e,t,n){var o=document.createElement("h1"),r=document.createTextNode(t);o.appendChild(r),o.setAttribute("style",n),e.insertBefore(o,e.childNodes[0])}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o={isFirefox:function(){return"undefined"!=typeof InstallTrigger},isIE:function(){return-1!==navigator.userAgent.indexOf("MSIE")||!!document.documentMode},isEdge:function(){return!o.isIE()&&!!window.StyleMedia},isChrome:function(){return!!(0<arguments.length&&void 0!==arguments[0]?arguments[0]:window).chrome},isSafari:function(){return 0<Object.prototype.toString.call(window.HTMLElement).indexOf("Constructor")||-1!==navigator.userAgent.toLowerCase().indexOf("safari")}};t.default=o},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a={show:function(e){var t=document.createElement("div");t.setAttribute("style","font-family:sans-serif; display:table; text-align:center; font-weight:300; font-size:30px; left:0; top:0;position:fixed; z-index: 9990;color: #0460B5; width: 100%; height: 100%; background-color:rgba(255,255,255,.9);transition: opacity .3s ease;"),t.setAttribute("id","printJS-Modal");var n=document.createElement("div");n.setAttribute("style","display:table-cell; vertical-align:middle; padding-bottom:100px;");var o=document.createElement("div");o.setAttribute("class","printClose"),o.setAttribute("id","printClose"),n.appendChild(o);var r=document.createElement("span");r.setAttribute("class","printSpinner"),n.appendChild(r);var i=document.createTextNode(e.modalMessage);n.appendChild(i),t.appendChild(n),document.getElementsByTagName("body")[0].appendChild(t),document.getElementById("printClose").addEventListener("click",function(){a.close()})},close:function(){var e=document.getElementById("printJS-Modal");e.parentNode.removeChild(e)}};t.default=a},function(e,t,n){e.exports=n(5)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),n(6);var o,r=n(7);var i=((o=r)&&o.__esModule?o:{default:o}).default.init;"undefined"!=typeof window&&(window.printJS=i),t.default=i},function(e,t,n){},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},i=o(n(2)),a=o(n(3)),d=o(n(8)),l=o(n(9)),s=o(n(10)),u=o(n(11));function o(e){return e&&e.__esModule?e:{default:e}}var c=["pdf","html","image","json"];t.default={init:function(){var t={printable:null,fallbackPrintable:null,type:"pdf",header:null,headerStyle:"font-weight: 300;",maxWidth:800,font:"TimesNewRoman",font_size:"12pt",honorMarginPadding:!0,honorColor:!1,properties:null,gridHeaderStyle:"font-weight: bold; padding: 5px; border: 1px solid #dddddd;",gridStyle:"border: 1px solid lightgray; margin-bottom: -1px;",showModal:!1,onError:function(e){throw e},onLoadingStart:null,onLoadingEnd:null,onPrintDialogClose:null,onPdfOpen:null,modalMessage:"Retrieving Document...",frameId:"printJS",htmlData:"",documentTitle:"Document",targetStyle:["clear","display","width","min-width","height","min-height","max-height"],targetStyles:["border","box","break","text-decoration"],ignoreElements:[],imageStyle:"width:100%;",repeatTableHeader:!0,css:null,style:null,scanStyles:!0},e=arguments[0];if(void 0===e)throw new Error("printJS expects at least 1 attribute.");switch(void 0===e?"undefined":r(e)){case"string":t.printable=encodeURI(e),t.fallbackPrintable=t.printable,t.type=arguments[1]||t.type;break;case"object":t.printable=e.printable,t.fallbackPrintable=void 0!==e.fallbackPrintable?e.fallbackPrintable:t.printable,t.type=void 0!==e.type?e.type:t.type,t.frameId=void 0!==e.frameId?e.frameId:t.frameId,t.header=void 0!==e.header?e.header:t.header,t.headerStyle=void 0!==e.headerStyle?e.headerStyle:t.headerStyle,t.maxWidth=void 0!==e.maxWidth?e.maxWidth:t.maxWidth,t.font=void 0!==e.font?e.font:t.font,t.font_size=void 0!==e.font_size?e.font_size:t.font_size,t.honorMarginPadding=void 0!==e.honorMarginPadding?e.honorMarginPadding:t.honorMarginPadding,t.properties=void 0!==e.properties?e.properties:t.properties,t.gridHeaderStyle=void 0!==e.gridHeaderStyle?e.gridHeaderStyle:t.gridHeaderStyle,t.gridStyle=void 0!==e.gridStyle?e.gridStyle:t.gridStyle,t.showModal=void 0!==e.showModal?e.showModal:t.showModal,t.onError=void 0!==e.onError?e.onError:t.onError,t.onLoadingStart=void 0!==e.onLoadingStart?e.onLoadingStart:t.onLoadingStart,t.onLoadingEnd=void 0!==e.onLoadingEnd?e.onLoadingEnd:t.onLoadingEnd,t.onPrintDialogClose=void 0!==e.onPrintDialogClose?e.onPrintDialogClose:t.onPrintDialogClose,t.onPdfOpen=void 0!==e.onPdfOpen?e.onPdfOpen:t.onPdfOpen,t.modalMessage=void 0!==e.modalMessage?e.modalMessage:t.modalMessage,t.documentTitle=void 0!==e.documentTitle?e.documentTitle:t.documentTitle,t.targetStyle=void 0!==e.targetStyle?e.targetStyle:t.targetStyle,t.targetStyles=void 0!==e.targetStyles?e.targetStyles:t.targetStyles,t.ignoreElements=void 0!==e.ignoreElements?e.ignoreElements:t.ignoreElements,t.imageStyle=void 0!==e.imageStyle?e.imageStyle:t.imageStyle,t.repeatTableHeader=void 0!==e.repeatTableHeader?e.repeatTableHeader:t.repeatTableHeader,t.css=void 0!==e.css?e.css:t.css,t.style=void 0!==e.style?e.style:t.style,t.scanStyles=void 0!==e.scanStyles?e.scanStyles:t.scanStyles;break;default:throw new Error('Unexpected argument type! Expected "string" or "object", got '+(void 0===e?"undefined":r(e)))}if(!t.printable)throw new Error("Missing printable information.");if(!t.type||"string"!=typeof t.type||-1===c.indexOf(t.type.toLowerCase()))throw new Error("Invalid print type. Available types are: pdf, html, image and json.");t.showModal&&a.default.show(t),t.onLoadingStart&&t.onLoadingStart();var n=document.getElementById(t.frameId);n&&n.parentNode.removeChild(n);var o=void 0;switch((o=document.createElement("iframe")).setAttribute("style","visibility: hidden; height: 0; width: 0; position: absolute;"),o.setAttribute("id",t.frameId),"pdf"!==t.type&&(o.srcdoc="<html><head><title>"+t.documentTitle+"</title>",null!==t.css&&(Array.isArray(t.css)||(t.css=[t.css]),t.css.forEach(function(e){o.srcdoc+='<link rel="stylesheet" href="'+e+'">'})),o.srcdoc+="</head><body></body></html>"),t.type){case"pdf":if(i.default.isFirefox()||i.default.isEdge()||i.default.isIE())try{console.info("PrintJS currently doesn't support PDF printing in Firefox, Internet Explorer and Edge."),window.open(t.fallbackPrintable,"_blank").focus(),t.onPdfOpen&&t.onPdfOpen()}catch(e){t.onError(e)}finally{t.showModal&&a.default.close(),t.onLoadingEnd&&t.onLoadingEnd()}else d.default.print(t,o);break;case"image":s.default.print(t,o);break;case"html":l.default.print(t,o);break;case"json":u.default.print(t,o)}}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o,r=n(0),i=(o=r)&&o.__esModule?o:{default:o};function a(e,t){t.setAttribute("src",e.printable),i.default.send(e,t)}t.default={print:function(t,n){if(t.printable=/^(blob|http)/i.test(t.printable)?t.printable:window.location.origin+("/"!==t.printable.charAt(0)?"/"+t.printable:t.printable),t.showModal||t.onLoadingStart){var o=new window.XMLHttpRequest;o.responseType="arraybuffer",o.addEventListener("load",function(){var e=new window.Blob([o.response],{type:"application/pdf"});e=window.URL.createObjectURL(e),t.printable=e,a(t,n)}),o.open("GET",t.printable,!0),o.send()}else a(t,n)}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o,i=n(1),r=n(0),a=(o=r)&&o.__esModule?o:{default:o};t.default={print:function(e,t){var n=document.getElementById(e.printable);if(!n)return window.console.error("Invalid HTML element id: "+e.printable),!1;var o=document.createElement("div");if(o.appendChild(n.cloneNode(!0)),o.setAttribute("style","height:0; overflow:hidden;"),o.setAttribute("id","printJS-html"),n.parentNode.appendChild(o),o=document.getElementById("printJS-html"),!0===e.scanStyles){e.honorMarginPadding&&e.targetStyles.push("margin","padding"),e.honorColor&&e.targetStyles.push("color"),o.setAttribute("style",(0,i.collectStyles)(o,e)+"margin:0 !important;");var r=o.children;(0,i.loopNodesCollectStyles)(r,e)}e.header&&(0,i.addHeader)(o,e.header,e.headerStyle),o.parentNode.removeChild(o),e.htmlData=(0,i.addWrapper)(o.innerHTML,e),a.default.send(e,t)}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o,r=n(1),i=n(0),a=(o=i)&&o.__esModule?o:{default:o};t.default={print:function(e,t){e.printable.constructor!==Array&&(e.printable=[e.printable]);var d,l,s,n=document.createElement("div");n.setAttribute("style","width:100%"),(d=n,l=e,s=[],l.printable.forEach(function(e,t){var n,o,r,i,a=document.createElement("img");a.src=e,s.push((n=d,o=l,r=a,i=t,new Promise(function(t){r.onload=function(){var e=document.createElement("div");e.setAttribute("style",o.imageStyle),r.setAttribute("style","width:100%;"),r.setAttribute("id","printableImage"+i),e.appendChild(r),n.appendChild(e),t()}})))}),Promise.all(s)).then(function(){e.header&&(0,r.addHeader)(n,e.header,e.headerStyle),e.htmlData=n.outerHTML,a.default.send(e,t)})}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o,r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},u=n(1),i=n(0),a=(o=i)&&o.__esModule?o:{default:o};t.default={print:function(t,e){if("object"!==r(t.printable))throw new Error("Invalid javascript data object (JSON).");if("boolean"!=typeof t.repeatTableHeader)throw new Error("Invalid value for repeatTableHeader attribute (JSON).");if(!t.properties||!Array.isArray(t.properties))throw new Error("Invalid properties array for your JSON data.");t.properties=t.properties.map(function(e){return{field:"object"===(void 0===e?"undefined":r(e))?e.field:e,displayName:"object"===(void 0===e?"undefined":r(e))?e.displayName:e,columnSize:"object"===(void 0===e?"undefined":r(e))&&e.columnSize?e.columnSize+";":100/t.properties.length+"%;"}});var n="";t.header&&(n+='<h1 style="'+t.headerStyle+'">'+t.header+"</h1>"),n+=function(e){var t=e.printable,n=e.properties,o='<table style="border-collapse: collapse; width: 100%;">';e.repeatTableHeader&&(o+="<thead>");o+="<tr>";for(var r=0;r<n.length;r++)o+='<th style="width:'+n[r].columnSize+";"+e.gridHeaderStyle+'">'+(0,u.capitalizePrint)(n[r].displayName)+"</th>";o+="</tr>",e.repeatTableHeader&&(o+="</thead>");o+="<tbody>";for(var i=0;i<t.length;i++){o+="<tr>";for(var a=0;a<n.length;a++){var d=t[i],l=n[a].field.split(".");if(1<l.length)for(var s=0;s<l.length;s++)d=d[l[s]];else d=d[n[a].field];o+='<td style="width:'+n[a].columnSize+e.gridStyle+'">'+d+"</td>"}o+="</tr>"}return o+="</tbody></table>"}(t),t.htmlData=(0,u.addWrapper)(n,t),a.default.send(t,e)}}}]).default});
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "<span class=\"tag\" data-value=\""
-    + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
-    + " <i class=\"fas fa-times\"></i></span>";
-},"useData":true});
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "<li class=\"list\" data-value=\""
-    + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
-    + "\">"
-    + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
-    + " <i class=\"fas fa-times\"></i></li>";
-},"useData":true});
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "            <tr class=\"lesson\" data-id=\""
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "\">\r\n                <td class=\"lesson-id\">"
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "</td>\r\n                <td>"
-    + alias2(alias1((depth0 != null ? depth0.username : depth0), depth0))
-    + "</td>\r\n                <td class=\"lesson-name\">\r\n                    "
-    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
-    + "\r\n                    <div class=\"tag-wrapper\">\r\n                        "
-    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.tags : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n                    </div>\r\n                </td>\r\n                <td>"
-    + alias2(alias1((depth0 != null ? depth0.program : depth0), depth0))
-    + "</td>\r\n                <td>"
-    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.subject : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</td>\r\n                <td>"
-    + alias2(__default(__webpack_require__(34)).call(alias3,(depth0 != null ? depth0.level : depth0),",",", ",{"name":"replaceAll","hash":{},"data":data}))
-    + "</td>\r\n                <td>"
-    + alias2(alias1((depth0 != null ? depth0.block : depth0), depth0))
-    + "</td>\r\n                <td>"
-    + ((stack1 = __default(__webpack_require__(28)).call(alias3,(depth0 != null ? depth0.lesson_work : depth0),"==","",{"name":"ifCond","hash":{},"fn":container.program(6, data, 0),"inverse":container.program(9, data, 0),"data":data})) != null ? stack1 : "")
-    + "</td>\r\n                <td class=\"action-wrapper\">\r\n                    <button id=\"print-button\" title=\"Print\" data-file_name=\""
-    + alias2(alias1((depth0 != null ? depth0.file_url : depth0), depth0))
-    + "\" style=\"display: none\"><i class=\"fas fa-print\"></i></button>\r\n                    <a href=\"/templates/bundle/assets/lessons/"
-    + alias2(alias1((depth0 != null ? depth0.file_url : depth0), depth0))
-    + "\" download><button id=\"download-button\" title=\"Download\"><i class=\"fas fa-file-download\"></i></button></a>\r\n                    <button id=\"edit-button\" title=\"Edit\"><i class=\"fas fa-edit\"></i></button>\r\n                    <button id=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    return "<span class=\"tag\">"
-    + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</span>";
-},"4":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "<div class=\"lesson-item\" data-value=\""
-    + alias2(alias1(depth0, depth0))
-    + "\">"
-    + alias2(alias1(depth0, depth0))
-    + "</div>";
-},"6":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = __default(__webpack_require__(28)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.add_or_take : depth0),"==","",{"name":"ifCond","hash":{},"fn":container.program(7, data, 0),"inverse":container.program(9, data, 0),"data":data})) != null ? stack1 : "");
-},"7":function(container,depth0,helpers,partials,data) {
-    return "<span style=\"display: none\">1</span><span id=\"x-mark\" class=\"reflection-icon\"><i class=\"fas fa-times\"></i></span>";
-},"9":function(container,depth0,helpers,partials,data) {
-    return "<span style=\"display: none\">2</span><span id=\"check-mark\" class=\"reflection-icon\"><i class=\"fas fa-check\"></i></span>";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<h4>Lessons</h4>\r\n<table id=\"lesson-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Lesson Name</th>\r\n            <th class=\"sortable\" scope=\"col\">Program</th>\r\n            <th class=\"sortable\" scope=\"col\">Subject</th>\r\n            <th class=\"sortable\" scope=\"col\">Level</th>\r\n            <th class=\"sortable\" scope=\"col\">Block</th>\r\n            <th class=\"sortable\" scope=\"col\">Reflection</th>\r\n            <th scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </tbody>\r\n</table>";
-},"useData":true});
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports) {
-
-module.exports = function(str, find, replace) {
-    return String(str).replace(new RegExp(find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g'), replace);
-};
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h4>Lessons</h4>\r\n<div id=\"empty-lesson-wrapper\">\r\n    <span id=\"empty-lesson-icon\"><i class=\"fas fa-file-word\"></i></span>\r\n    <span id=\"drag-drop-text\">Drag & Drop</span>\r\n</div>";
-},"useData":true});
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return " <div id=\"dragover-wrapper\">\r\n    <div id=\"dragover-container\">\r\n        <div id=\"file-icons-wrapper\">\r\n            <span><i class=\"fas fa-file-invoice\"></i></span>\r\n            <span><i class=\"fas fa-file-alt\"></i></span>\r\n            <span><i class=\"fas fa-file-contract\"></i></span>\r\n        </div>\r\n        <h4>Drag & Drop</h4>\r\n        <p>Upload a lesson.</p>\r\n    </div>\r\n</div>\r\n<div id=\"upload-wrapper\">\r\n    <div id=\"upload-container\">\r\n        <div id=\"upload-details-wrapper\">\r\n            <div id=\"file-section-1\">\r\n                <span id=\"file-icon\"><i class=\"fas fa-file\"></i></span>\r\n                <label for=\"file-name-input\">Lesson Name</label>\r\n                <input type=\"text\" id=\"file-name-input\"/>\r\n            </div>\r\n\r\n            <div id=\"file-section-2\">\r\n                <div>\r\n                    <label for=\"tag-input\">Tags</label>\r\n                    <div class=\"tag-wrapper\"></div>\r\n                    <p>Press 'Enter' to add to the list.</p>\r\n                    <input id=\"tag-input\" />\r\n                </div>\r\n            </div>\r\n\r\n            <div id=\"file-section-3\">\r\n                <div>\r\n                    <label for=\"program-input\">Program</label>\r\n                    <select id=\"program-input\">\r\n                        <option value=\"ELAA\">ELAA</option>\r\n                        <option value=\"GED\">GED</option>\r\n                    </select>\r\n                </div>\r\n                <div>\r\n                    <label id=\"subject-title\" for=\"subject-input\">Subject</label>\r\n                    <div>\r\n                        <input type=\"checkbox\" id=\"reading-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Reading\" style=\"display: none\">\r\n                        <label for=\"reading-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Reading</span>\r\n                        </label>\r\n                        <input type=\"checkbox\" id=\"writing-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Writing\" style=\"display: none\">\r\n                        <label for=\"writing-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Writing</span>\r\n                        </label> <br/>\r\n                        <input type=\"checkbox\" id=\"mathematics-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Mathematics\" style=\"display: none\">\r\n                        <label for=\"mathematics-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Mathematics</span>\r\n                        </label>\r\n                        <input type=\"checkbox\" id=\"social-studies-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Social Studies\" style=\"display: none\">\r\n                        <label for=\"social-studies-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Social Studies</span>\r\n                        </label><br/>\r\n                        <input type=\"checkbox\" id=\"science-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Science\" style=\"display: none\">\r\n                        <label for=\"science-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Science</span>\r\n                        </label>\r\n                        <input type=\"checkbox\" id=\"listening-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Listening\" style=\"display: none\">\r\n                        <label for=\"listening-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Listening</span>\r\n                        </label>\r\n                        <input type=\"checkbox\" id=\"speaking-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"Speaking\" style=\"display: none\">\r\n                        <label for=\"speaking-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">Speaking</span>\r\n                        </label>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div id=\"file-section-4\">\r\n                <div>\r\n                    <label for=\"block-input\">Block</label>\r\n                    <select id=\"block-input\">\r\n                        <option value=\"1\">1</option>\r\n                        <option value=\"2\">2</option>\r\n                        <option value=\"3\">3</option>\r\n                        <option value=\"4\">4</option>\r\n                        <option value=\"5\">5</option>\r\n                        <option value=\"6\">6</option>\r\n                        <option value=\"7\">7</option>\r\n                        <option value=\"8\">8</option>\r\n                        <option value=\"9\">9</option>\r\n                        <option value=\"10\">10</option>\r\n                        <option value=\"11\">11</option>\r\n                        <option value=\"12\">12</option>\r\n                    </select>\r\n                </div>\r\n                <div id=\"level-wrapper\">\r\n                    <label>Level</label>\r\n                    <span class=\"one-line\">\r\n                        <input type=\"checkbox\" id=\"level-1-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"1\" style=\"display: none\">\r\n                        <label for=\"level-1-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">1</span>\r\n                        </label>\r\n                        <input type=\"checkbox\" id=\"level-2-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"2\" style=\"display: none\">\r\n                        <label for=\"level-2-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">2</span>\r\n                        </label>\r\n                        <input type=\"checkbox\" id=\"level-3-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"3\" style=\"display: none\">\r\n                        <label for=\"level-3-checkbox\" class=\"check-box-wrapper\">\r\n                            <span class=\"check-box\">\r\n                                <svg width=\"12px\" height=\"10px\">\r\n                                    <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                </svg>\r\n                            </span>\r\n                            <span class=\"check-box-label\">3</span>\r\n                        </label>\r\n                    </span>\r\n                    <br/>\r\n                    <input type=\"checkbox\" id=\"level-4-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"4\" style=\"display: none\">\r\n                    <label for=\"level-4-checkbox\" class=\"check-box-wrapper\">\r\n                        <span class=\"check-box\">\r\n                            <svg width=\"12px\" height=\"10px\">\r\n                                <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                            </svg>\r\n                        </span>\r\n                        <span class=\"check-box-label\">4</span>\r\n                    </label>\r\n                    <input type=\"checkbox\" id=\"level-5-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"5\" style=\"display: none\">\r\n                    <label for=\"level-5-checkbox\" class=\"check-box-wrapper\">\r\n                        <span class=\"check-box\">\r\n                            <svg width=\"12px\" height=\"10px\">\r\n                                <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                            </svg>\r\n                        </span>\r\n                        <span class=\"check-box-label\">5</span>\r\n                    </label>\r\n                </div>\r\n                <div>\r\n                    <label for=\"standard-input\">Standard</label>\r\n                    <select id=\"standard-input\">\r\n                    <option value=\"1\">1</option>\r\n                    <option value=\"2\">2</option>\r\n                    <option value=\"3\">3</option>\r\n                    <option value=\"4\">4</option>\r\n                    <option value=\"5\">5</option>\r\n                    <option value=\"6\">6</option>\r\n                    <option value=\"7\">7</option>\r\n                    <option value=\"8\">8</option>\r\n                    <option value=\"9\">9</option>\r\n                    <option value=\"10\">10</option>\r\n                    <option value=\"11\">11</option>\r\n                    <option value=\"12\">12</option>\r\n                </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div id=\"upload-submit-wrapper\">\r\n        <button id=\"lesson-cancel-button\">Cancel</button>\r\n        <button id=\"lesson-submit-button\">Submit</button>\r\n    </div>\r\n</div>\r\n\r\n<div id=\"create-document-overlay\">\r\n    <div id=\"create-document-wrapper\">\r\n        <div id=\"create-document-scroll-wrapper\">\r\n            <div id=\"doc-section-1\">\r\n                <span id=\"file-icon\"><i class=\"fas fa-file-word\"></i></span>\r\n                <label for=\"name-input\">Instructor Name</label>\r\n                <input type=\"text\" id=\"name-input\"/>\r\n            </div>\r\n            <div id=\"doc-section-2\">\r\n                <div id=\"left-wrapper\">\r\n                    <div class=\"input-wrapper\">\r\n                        <label>Program</label>\r\n                        <div>\r\n                            ABE\r\n                            <div class=\"one-line\">\r\n                                <input type=\"checkbox\" id=\"abe-1-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-1\" style=\"display: none\">\r\n                                <label for=\"abe-1-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">1</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-2-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-2\" style=\"display: none\">\r\n                                <label for=\"abe-2-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">2</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-3-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-3\" style=\"display: none\">\r\n                                <label for=\"abe-3-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">3</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-4-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-4\" style=\"display: none\">\r\n                                <label for=\"abe-4-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">4</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-5-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-5\" style=\"display: none\">\r\n                                <label for=\"abe-5-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">5</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-6-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-6\" style=\"display: none\">\r\n                                <label for=\"abe-6-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">6</span>\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div>\r\n                            ELAA\r\n                            <div class=\"one-line\">\r\n                                <input type=\"checkbox\" id=\"elaa-1-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-1\" style=\"display: none\">\r\n                                <label for=\"elaa-1-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">1</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-2-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-2\" style=\"display: none\">\r\n                                <label for=\"elaa-2-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">2</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-3-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-3\" style=\"display: none\">\r\n                                <label for=\"elaa-3-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">3</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-4-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-4\" style=\"display: none\">\r\n                                <label for=\"elaa-4-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">4</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-5-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-5\" style=\"display: none\">\r\n                                <label for=\"elaa-5-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">5</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-6-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-6\" style=\"display: none\">\r\n                                <label for=\"elaa-6-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">6</span>\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"input-wrapper subject\">\r\n                        <label>Subject</label>\r\n                        <div>\r\n                            ABE\r\n                            <div>\r\n                                <input type=\"checkbox\" id=\"abe-r-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-r\" style=\"display: none\">\r\n                                <label for=\"abe-r-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Reading</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-w-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-w\" style=\"display: none\">\r\n                                <label for=\"abe-w-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Writing</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-m-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-m\" style=\"display: none\">\r\n                                <label for=\"abe-m-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Mathematics</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-ss-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-ss\" style=\"display: none\">\r\n                                <label for=\"abe-ss-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Social Studies</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"abe-s-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"abe-s\" style=\"display: none\">\r\n                                <label for=\"abe-s-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Science</span>\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div>\r\n                            ELAA\r\n                            <div>\r\n                                <input type=\"checkbox\" id=\"elaa-r-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-r\" style=\"display: none\">\r\n                                <label for=\"elaa-r-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Reading</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-w-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-w\" style=\"display: none\">\r\n                                <label for=\"elaa-w-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Writing</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-l-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-l\" style=\"display: none\">\r\n                                <label for=\"elaa-l-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Listening</span>\r\n                                </label>\r\n                                <input type=\"checkbox\" id=\"elaa-s-checkbox\" data-type=\"columns\" class=\"checkbox-input column-filter\" value=\"elaa-s\" style=\"display: none\">\r\n                                <label for=\"elaa-s-checkbox\" class=\"check-box-wrapper\">\r\n                                    <span class=\"check-box\">\r\n                                        <svg width=\"12px\" height=\"10px\">\r\n                                            <polyline points=\"1.5 6 4.5 9 10.5 1\"></polyline>\r\n                                        </svg>\r\n                                    </span>\r\n                                    <span class=\"check-box-label\">Speaking</span>\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"addressed-input\">Standards Addressed</label>\r\n                        <ul id=\"addressed-wrapper\"></ul>\r\n                        <p>Press 'Enter' to add to the list.</p>\r\n                        <input id=\"addressed-input\" />\r\n                    </div>\r\n\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"lesson-title-input\">Lesson Title</label>\r\n                        <input id=\"lesson-title-input\" />\r\n                    </div>\r\n                </div>\r\n\r\n                <div id=\"right-wrapper\">\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"lesson-objective-input\">Lesson Objective(s)</label>\r\n                        <ul id=\"lesson-objective-wrapper\"></ul>\r\n                        <p>Press 'Enter' to add to the list.</p>\r\n                        <input id=\"lesson-objective-input\" />\r\n                    </div>\r\n\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"resources-input\">Curriculum Resources</label>\r\n                        <ul id=\"resources-wrapper\"></ul>\r\n                        <p>Press 'Enter' to add to the list.</p>\r\n                        <input id=\"resources-input\" />\r\n                    </div>\r\n\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"introduction-input\">Introduction</label>\r\n                        <textarea id=\"introduction-input\"></textarea>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div id=\"doc-section-3\">\r\n                <div class=\"input-wrapper\">\r\n                    <label>Classroom Procedure</label>\r\n                    <div id=\"inner-doc-section-3\">\r\n                        <label for=\"input-modeling-input\">Input and Modeling</label>\r\n                        <textarea id=\"input-modeling-input\"></textarea>\r\n                        <label for=\"understanding-input\">Check for Understanding</label>\r\n                        <textarea id=\"understanding-input\"></textarea>\r\n                        <label for=\"practice-input\">Independent Practice</label>\r\n                        <textarea id=\"practice-input\"></textarea>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div id=\"doc-section-4\">\r\n                <div id=\"left-wrapper\">\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"closure-input\">Closure</label>\r\n                        <textarea id=\"closure-input\"></textarea>\r\n                    </div>\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"extended-learning-input\">Extended Learning (Practice Outside of Classroom)</label>\r\n                        <textarea id=\"extended-learning-input\"></textarea>\r\n                    </div>\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"assessment-input\">Assessment (Formative, Standardized, Other)</label>\r\n                        <textarea id=\"assessment-input\"></textarea>\r\n                    </div>\r\n                </div>\r\n                <div id=\"right-wrapper\">\r\n                    <div class=\"input-wrapper\">\r\n                        <label for=\"udl-input\">UDL (Universal Design for Learning)</label>\r\n                        <textarea id=\"udl-input\"></textarea>\r\n                    </div>\r\n\r\n                    <div class=\"input-wrapper\">\r\n                        <label>After Lesson Reflection</label>\r\n                        <div class=\"inner-doc-section\">\r\n                            <label for=\"work-input\">Did the lesson work?</label>\r\n                            <textarea id=\"work-input\"></textarea>\r\n                            <label for=\"add-input\">What would you add or take away?</label>\r\n                            <textarea id=\"add-input\"></textarea>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div id=\"doc-submit-wrapper\">\r\n        <button id=\"doc-cancel-button\">Cancel</button>\r\n        <button id=\"doc-submit-button\">Submit</button>\r\n    </div>\r\n</div>\r\n\r\n<div id=\"delete-wrapper\">\r\n    <p id=\"delete-message\">Would you like to delete lesson <span id=\"delete-lesson-id\">0</span>?</p>\r\n    <p id=\"delete-warning\">You cannot undo this action.</p>\r\n    <div id=\"delete-submit-wrapper\">\r\n        <button id=\"delete-cancel-button\">Cancel</button>\r\n        <button id=\"delete-submit-button\">Delete</button>\r\n    </div>\r\n</div>\r\n\r\n<div id=\"reflection-wrapper\">\r\n    <div id=\"reflection-container\">\r\n        <div id=\"reflection-details-wrapper\">\r\n            <div id=\"reflection-section-1\">\r\n                <span id=\"reflection-icon\"><i class=\"fab fa-pied-piper-alt\"></i></span>\r\n                <label>After Lesson Reflection</label>\r\n            </div>\r\n            <div id=\"reflection-section-2\">\r\n                <label for=\"reflection-1-input\">Did the lesson work?</label>\r\n                <textarea id=\"reflection-1-input\"></textarea>\r\n                <label for=\"reflection-2-input\">What would you add or take away?</label>\r\n                <textarea id=\"reflection-2-input\"></textarea>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div id=\"reflection-submit-wrapper\">\r\n        <button id=\"reflection-cancel-button\">Cancel</button>\r\n        <button id=\"reflection-submit-button\">Submit</button>\r\n    </div>\r\n</div>\r\n";
-},"useData":true});
-
-/***/ }),
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
 /* 37 */,
 /* 38 */,
 /* 39 */,
@@ -12187,35 +12033,45 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 /* 42 */,
 /* 43 */,
 /* 44 */,
-/* 45 */
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(6);
-__webpack_require__(29);
+__webpack_require__(52);
 __webpack_require__(11);
 __webpack_require__(7);
-__webpack_require__(30);
 var $ = __webpack_require__(4);
 __webpack_require__(12);
 
-var tagTemplate = __webpack_require__(31);
-var listTemplate = __webpack_require__(32);
-var lessonTemplate = __webpack_require__(33);
-var emptyLessonTemplate = __webpack_require__(35);
-var overlayTemplate = __webpack_require__(36);
+var resourceTemplate = __webpack_require__(53);
+var emptyResourceTemplate = __webpack_require__(54);
+var linksTemplate = __webpack_require__(55);
+var emptyLinksTemplate = __webpack_require__(56);
 
 function init() {
-    var $lessonListWrapper = $('#lesson-list-wrapper');
+    var $fileWrapper = $('#file-wrapper');
+    var $linkWrapper = $('#link-wrapper');
 
-    if(globals.lessons.length) {
-        $lessonListWrapper.append(lessonTemplate(globals.lessons));
+    if(globals.resources.length) {
+        $fileWrapper.append(resourceTemplate(globals.resources));
     } else {
-        $lessonListWrapper.append(emptyLessonTemplate(globals.lessons));
+        $fileWrapper.append(emptyResourceTemplate(globals.resources));
     }
 
-    for (var i = 0; i < globals.lessons.length; i++) {
-        var currentLesson = globals.lessons[i];
-        $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
+    if(globals.links.length) {
+        $linkWrapper.append(linksTemplate(globals.links));
+    } else {
+        $linkWrapper.append(emptyLinksTemplate(globals.links));
+    }
+
+    if(globals.admin) {
+        $('body').addClass('admin');
     }
 }
 
@@ -12235,39 +12091,25 @@ $(document).ready(function() {
         $(this).closest('#nav-wrapper').toggleClass('account-active');
     });
 
-    $(document).on('click', '#logout-link', function () {
-        window.location.replace(globals.base_url + '/logout');
-    });
-
     $(document).on('click', '#resources-link', function () {
         window.location.replace(globals.base_url + '/resources');
     });
 
-    $(document).on('keyup', '#tag-input', function (e) {
-        var keycode = e.keyCode;
-
-        if(keycode == 13) {
-            var $this = $(this);
-            var value = capitalize($this.val().replace(',', '').trim().toLowerCase());
-            $('#upload-wrapper .tag-wrapper').append(tagTemplate({value: value}));
-            $this.val('');
-        }
-    });
-
-    $(document).on('click', '#upload-wrapper .tag-wrapper span, .input-wrapper .list', function () {
-        $(this).remove();
+    $(document).on('click', '#logout-link', function () {
+        window.location.replace(globals.base_url + '/logout');
     });
 
     //OVERLAY//
-    $(document).on('click', 'body, #lesson-cancel-button, #doc-cancel-button, #reflection-cancel-button', function () {
+    $(document).on('click', 'body, #file-cancel-button, #link-cancel-button, #delete-cancel-button', function () {
         var $overlay = $('#overlay');
+        $overlay.removeClass('resources');
         $overlay.removeClass('active');
+        $overlay.removeClass('link');
         $overlay.removeClass('drop');
-        $overlay.removeClass('document');
-        $overlay.removeClass('reflection');
+        $overlay.removeClass('delete');
     });
 
-    $(document).on('click', '#upload-wrapper, #create-document-overlay', function (e) {
+    $(document).on('click', '#upload-wrapper, #link-overlay-wrapper, #upload-wrapper', function (e) {
         e.stopPropagation();
     });
     //OVERLAY//
@@ -12291,65 +12133,23 @@ $(document).ready(function() {
             e.stopPropagation();
 
             var file = e.originalEvent.dataTransfer.files[0];
-            var fileType = file.type;
-
-            if(fileType == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || fileType == 'application/msword' || fileType == 'application/pdf') {
-                $('#overlay').addClass('drop');
-                globals.file = file;
-            } else {
-                alert('This file must be doc, docx, or pdf!');
-            }
+            $('#overlay').addClass('resources');
+            globals.file = file;
         }
     });
 
-    $(document).on('click', '#lesson-submit-button', function () {
+    $(document).on('click', '#file-submit-button', function () {
         var formData = new FormData();
-        var $tags = $('#overlay').find('.tag');
-        var $subjects = $('#file-section-3 input');
-        var $levels = $('#level-wrapper input');
-        var tags = [];
-        var subjects = [];
-        var levels = [];
-        var fileType = 'docx';
-
-        for (var i = 0; i < $tags.length; i++) {
-            var $currentTag = $($tags[i]);
-            tags.push($currentTag.attr('data-value'));
-        }
-
-        for (var s = 0; s < $subjects.length; s++) {
-            var $currentSubject = $($subjects[s]);
-
-            if($currentSubject.prop(("checked"))) {
-                subjects.push($currentSubject.val());
-            }
-        }
-
-        for (var l = 0; l < $levels.length; l++) {
-            var $currentLevel = $($levels[l]);
-
-            if($currentLevel.prop(("checked"))) {
-                levels.push($currentLevel.val());
-            }
-        }
-
-        if(globals.file.type == 'application/pdf') {
-            fileType = 'pdf';
-        }
+        var fileType = globals.file.name.replace(/^.*\./, '');
+        var $fileNameInput = $('#file-name-input');
 
         formData.append('file', globals.file);
         formData.append('file_type', fileType);
-        formData.append('lesson_name', $('#file-name-input').val());
-        formData.append('tags', JSON.stringify(tags));
-        formData.append('program', $('#program-input').val());
-        formData.append('subject', JSON.stringify(subjects));
-        formData.append('level', JSON.stringify(levels));
-        formData.append('block', $('#block-input').val());
-        formData.append('standard', $('#standard-input').val());
+        formData.append('file_name', $fileNameInput.val());
 
         $.ajax({
             headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/file_upload/',
+            url: globals.base_url + '/resource_upload/',
             data: formData,
             type: "POST",
             cache: false,
@@ -12357,257 +12157,237 @@ $(document).ready(function() {
             processData: false,
             success: function (response) {
                 console.log(JSON.stringify(response));
-                $('#lesson-cancel-button').click();
-                var $lessonListWrapper = $('#lesson-list-wrapper');
-                globals.lessons = response['lessons'];
-                $lessonListWrapper.empty();
-                $lessonListWrapper.append(lessonTemplate(globals.lessons));
-
-                var $overlay = $('#overlay');
-                $overlay.empty();
-                $overlay.append(overlayTemplate({}));
-
-                for (var i = 0; i < globals.lessons.length; i++) {
-                    var currentLesson = globals.lessons[i];
-                    $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
-                }
+                $('#file-cancel-button').click();
+                var $fileWrapper = $('#file-wrapper');
+                globals.resources = response['resources'];
+                $fileWrapper.empty();
+                $fileWrapper.append(resourceTemplate(globals.resources));
+                $fileNameInput.val('');
             }
         });
     });
     //FILE UPLOAD//
 
-    //PRINT//
-    $(document).on('click', '#print-button', function () {
-        var file_name = $(this).attr('data-file_name');
-
-        //$.ajax({
-        //    headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-        //    url: globals.base_url + '/print/',
-        //    data: {'file_name': file_name},
-        //    dataType: 'json',
-        //    type: "POST",
-        //    success: function (response) {
-        //        //console.log(JSON.stringify(response));
-        //        printJS('/templates/bundle/assets/temporary/' + response['pdf_file']);
-        //    }
-        //});
-
-        printJS('/templates/bundle/assets/lessons/' + file_name);
+    //LINK//
+    $(document).on('click', '#empty-link-wrapper', function (e) {
+        e.stopPropagation();
+        var $overlay = $('#overlay');
+        $overlay.addClass('active');
+        $overlay.addClass('link');
     });
-    //PRINT//
+
+    $(document).on('click', '#link-submit-button', function () {
+        var $linkInput = $('#link-input');
+        var $linkNameInput = $('#link-name-input');
+
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/create_link/',
+            data: {'url': $linkInput.val(), 'name': $linkNameInput.val()},
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                console.log(JSON.stringify(response));
+                $('#link-cancel-button').click();
+                var $linkWrapper = $('#link-wrapper');
+                globals.links = response['links'];
+                $linkWrapper.empty();
+                $linkWrapper.append(linksTemplate(globals.links));
+                $linkInput.val('');
+                $linkNameInput.val('');
+            }
+        });
+    });
+    //LINK//
+
+    //DELETE//
+    $(document).on('click', '#delete-wrapper', function (e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('click', '.delete-button', function (e) {
+        e.stopPropagation();
+        var $this = $(this);
+
+        var $file = $this.closest('.file');
+        var $link = $this.closest('.link');
+
+        if($file.length) {
+            var type = 'file';
+            var id = $file.attr('data-id');
+        } else {
+            type = 'link';
+            id = $link.attr('data-id');
+        }
+
+        var $deleteSubmitButton = $('#delete-submit-button');
+        var $overlay = $('#overlay');
+
+        $deleteSubmitButton.attr('data-id', id);
+        $deleteSubmitButton.attr('data-type', type);
+
+        $('#delete-resource-id').text(id);
+        $('#delete-type').text(type);
+
+        $overlay.addClass('delete');
+    });
+
+    $(document).on('click', '#delete-cancel-button', function (e) {
+        e.stopPropagation();
+        var $overlay = $('#overlay');
+        $overlay.removeClass('active');
+        $overlay.removeClass('delete');
+    });
+
+    $(document).on('click', '#delete-submit-button', function () {
+        $.ajax({
+            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
+            url: globals.base_url + '/delete_resource/',
+            data: {'type': $(this).attr('data-type'), 'id': $(this).attr('data-id')},
+            dataType: 'json',
+            type: "POST",
+            success: function (response) {
+                $('#delete-cancel-button').click();
+                globals.resources = response['resources'];
+                globals.links = response['links'];
+
+                var $fileWrapper = $('#file-wrapper');
+                var $linkWrapper = $('#link-wrapper');
+
+                $fileWrapper.empty();
+                $linkWrapper.empty();
+
+                if(globals.resources.length) {
+                    $fileWrapper.append(resourceTemplate(globals.resources));
+                } else {
+                    $fileWrapper.append(emptyResourceTemplate(globals.resources));
+                }
+
+                if(globals.links.length) {
+                    $linkWrapper.append(linksTemplate(globals.links));
+                } else {
+                    $linkWrapper.append(emptyLinksTemplate(globals.links));
+                }
+            }
+        });
+    });
+    //DELETE//
 
     //SEARCH//
     $(document).on('keyup', '#search-input', function () {
         var value = $(this).val().replace(' ', '').replace('-', '').toLowerCase();
-        var $items = $('#lesson-table').find('tbody tr');
+        var $items = $('#file-table').find('tbody tr');
 
         for (var i = 0; i < $items.length; i++) {
             var $currentItem = $($items[i]);
-            var currentName = $currentItem.find('.lesson-name').text().replace(' ', '').replace('-', '').toLowerCase();
-            var currentId = $currentItem.find('.lesson-id').text();
+            var currentName = $currentItem.find('.file-name').text().replace(' ', '').replace('-', '').toLowerCase();
+            var currentId = $currentItem.find('.file-id').text();
 
             if(currentName.indexOf(value) !== -1 || currentId.indexOf(value) !== -1) {
                 $currentItem.show();
             } else {
-                var tags = $currentItem.find('.tag');
-                var tagVerification = false;
-
-                for (var t = 0; t < tags.length; t++) {
-                    var currentText = $(tags[t]).text();
-                    if(currentText.indexOf(value) !== -1) {
-                        tagVerification = true;
-                        break;
-                    }
-                }
-
-                if (tagVerification) {
-                    $currentItem.show();
-                } else {
-                    $currentItem.hide();
-                }
+                $currentItem.hide();
             }
         }
-    });
 
-    $(document).on('click', 'table .tag', function () {
-        var $searchInput = $('#search-input');
-        $searchInput.val($(this).text());
-        $searchInput.keyup();
+        var $links = $('#link-table').find('tbody tr');
+
+        for (var l = 0; l < $links.length; l++) {
+            $currentItem = $($links[l]);
+            currentName = $currentItem.find('.link-name a').text().replace(' ', '').replace('-', '').toLowerCase();
+            currentId = $currentItem.find('.link-id').text();
+
+            if(currentName.indexOf(value) !== -1 || currentId.indexOf(value) !== -1) {
+                $currentItem.show();
+            } else {
+                $currentItem.hide();
+            }
+        }
     });
     //SEARCH//
-
-    //CREATE DOCUMENT//
-    $(document).on('click', '#create-document-button', function (e) {
-        e.stopPropagation();
-        var $overlay = $('#overlay');
-        $overlay.addClass('active');
-        $overlay.addClass('document');
-    });
-
-    $(document).on('keyup', '#addressed-input', function (e) {
-        var keycode = e.keyCode;
-
-        if(keycode == 13) {
-            var $this = $(this);
-            $('#addressed-wrapper').append(listTemplate({value: $this.val().trim()}));
-            $this.val('');
-        }
-    });
-
-    $(document).on('keyup', '#lesson-objective-input', function (e) {
-        var keycode = e.keyCode;
-
-        if(keycode == 13) {
-            var $this = $(this);
-            $('#lesson-objective-wrapper').append(listTemplate({value: $this.val().trim()}));
-            $this.val('');
-        }
-    });
-
-    $(document).on('keyup', '#resources-input', function (e) {
-        var keycode = e.keyCode;
-
-        if(keycode == 13) {
-            var $this = $(this);
-            $('#resources-wrapper').append(listTemplate({value: $this.val().trim()}));
-            $this.val('');
-        }
-    });
-
-    $(document).on('click', '#doc-submit-button', function () {
-        var $addressedList = $('#addressed-wrapper').find('.list');
-        var addressed = [];
-
-        for (var i = 0; i < $addressedList.length; i++) {
-            var $currentList = $($addressedList[i]);
-            addressed.push({'Standards': $currentList.attr('data-value')});
-        }
-
-        var $objectiveList = $('#lesson-objective-wrapper').find('.list');
-        var objective = [];
-
-        for (var q = 0; q < $objectiveList.length; q++) {
-            $currentList = $($objectiveList[q]);
-            objective.push({'Objective': $currentList.attr('data-value')});
-        }
-
-        var $resourceList = $('#resources-wrapper').find('.list');
-        var resource = [];
-
-        for (var r = 0; r < $resourceList.length; r++) {
-            $currentList = $($resourceList[r]);
-            resource.push({'Resources': $currentList.attr('data-value')});
-        }
-
-        var data = {
-            'name': $('#name-input').val(),
-
-            'abe-1': $('#abe-1-checkbox').prop("checked") ? 'x' : '',
-            'abe-2': $('#abe-2-checkbox').prop("checked") ? 'x' : '',
-            'abe-3': $('#abe-3-checkbox').prop("checked") ? 'x' : '',
-            'abe-4': $('#abe-4-checkbox').prop("checked") ? 'x' : '',
-            'abe-5': $('#abe-5-checkbox').prop("checked") ? 'x' : '',
-            'abe-6': $('#abe-6-checkbox').prop("checked") ? 'x' : '',
-
-            'elaa-1': $('#elaa-1-checkbox').prop("checked") ? 'x' : '',
-            'elaa-2': $('#elaa-2-checkbox').prop("checked") ? 'x' : '',
-            'elaa-3': $('#elaa-3-checkbox').prop("checked") ? 'x' : '',
-            'elaa-4': $('#elaa-4-checkbox').prop("checked") ? 'x' : '',
-            'elaa-5': $('#elaa-5-checkbox').prop("checked") ? 'x' : '',
-            'elaa-6': $('#elaa-6-checkbox').prop("checked") ? 'x' : '',
-
-            'abe-r': $('#abe-r-checkbox').prop("checked") ? 'x' : '',
-            'abe-w': $('#abe-w-checkbox').prop("checked") ? 'x' : '',
-            'abe-m': $('#abe-m-checkbox').prop("checked") ? 'x' : '',
-            'abe-ss': $('#abe-ss-checkbox').prop("checked") ? 'x' : '',
-            'abe-s': $('#abe-s-checkbox').prop("checked") ? 'x' : '',
-
-            'elaa-r': $('#elaa-r-checkbox').prop("checked") ? 'x' : '',
-            'elaa-w': $('#elaa-w-checkbox').prop("checked") ? 'x' : '',
-            'elaa-l': $('#elaa-l-checkbox').prop("checked") ? 'x' : '',
-            'elaa-s': $('#elaa-s-checkbox').prop("checked") ? 'x' : '',
-
-            'lesson-title': $('#lesson-title-input').val(),
-            'introduction': $('#introduction-input').val(),
-            'input-modeling': $('#input-modeling-input').val(),
-            'understanding': $('#understanding-input').val(),
-            'practice': $('#practice-input').val(),
-            'closure': $('#closure-input').val(),
-            'extended-learning': $('#extended-learning-input').val(),
-            'assessment': $('#assessment-input').val(),
-            'udl': $('#udl-input').val(),
-            'work': $('#work-input').val(),
-            'add': $('#add-input').val(),
-
-            'addressed': addressed,
-            'objective': objective,
-            'resource': resource
-        };
-
-        $.ajax({
-            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/doc_creator/',
-            data: JSON.stringify(data),
-            type: "POST",
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                printJS('/templates/bundle/assets/document/' + response['doc']);
-                //console.log(JSON.stringify(response));
-                //$('#lesson-cancel-button').click();
-                //var $lessonListWrapper = $('#lesson-list-wrapper');
-                //globals.lessons = response['lessons'];
-                //$lessonListWrapper.empty();
-                //$lessonListWrapper.append(lessonTemplate(globals.lessons));
-            }
-        });
-    });
-    //CREATE DOCUMENT//
-
-    //REFLECTION//
-    $(document).on('click', '.reflection-icon', function (e) {
-        e.stopPropagation();
-        var $overlay = $('#overlay');
-        $overlay.addClass('active');
-        $overlay.addClass('reflection');
-
-        var lesson = $(this).closest('.lesson').data('lesson');
-        $('#reflection-1-input').val(lesson['lesson_work']);
-        $('#reflection-2-input').val(lesson['add_or_take']);
-
-        $('#reflection-submit-button').attr('data-id', lesson['id']);
-    });
-
-    $(document).on('click', '#reflection-wrapper', function (e) {
-        e.stopPropagation();
-    });
-
-    $(document).on('click', '#reflection-submit-button', function () {
-        $.ajax({
-            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/reflection/',
-            data: {'id': $(this).attr('data-id'), 'lesson_work': $('#reflection-1-input').val().trim(), 'add_or_take': $('#reflection-2-input').val().trim()},
-            dataType: 'json',
-            type: "POST",
-            success: function (response) {
-                $('#reflection-cancel-button').click();
-                globals.lessons = response['lessons'];
-
-                var $lessonListWrapper = $('#lesson-list-wrapper');
-
-                $lessonListWrapper.empty();
-                $lessonListWrapper.append(lessonTemplate(globals.lessons));
-
-                for (var i = 0; i < globals.lessons.length; i++) {
-                    var currentLesson = globals.lessons[i];
-                    $('.lesson[data-id=' + globals.lessons[i]['id'].toString() +']').data('lesson', currentLesson);
-                }
-            }
-        });
-    });
-    //REFLECTION//
 });
 
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "            <tr class=\"file\" data-id=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n                <td class=\"file-id\">"
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td>"
+    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td class=\"file-name\">"
+    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td class=\"action-wrapper\">\r\n                    <a href=\"/templates/bundle/assets/resources/"
+    + alias4(((helper = (helper = helpers.file_url || (depth0 != null ? depth0.file_url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"file_url","hash":{},"data":data}) : helper)))
+    + "\" download><button id=\"download-button\" title=\"Download\"><i class=\"fas fa-file-download\"></i></button></a>\r\n                    <button class=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<h4>Files</h4>\r\n<table id=\"file-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </tbody>\r\n</table>";
+},"useData":true});
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h4>Files</h4>\r\n<div id=\"empty-resource-wrapper\">\r\n    <span id=\"empty-resource-icon\"><i class=\"fas fa-file\"></i></span>\r\n    <span id=\"drag-drop-text\">Drag & Drop</span>\r\n</div>";
+},"useData":true});
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "            <tr class=\"link\" data-id=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n                <td class=\"link-id\">"
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td>"
+    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td class=\"link-name\"><a href=\""
+    + alias4(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
+    + "\" target=\"_blank\">"
+    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + "</a></td>\r\n                <td class=\"admin_operation action-wrapper\">\r\n                    <button class=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<h4>Links</h4>\r\n<table id=\"link-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th class=\"admin_operation\" scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </tbody>\r\n</table>";
+},"useData":true});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h4>Links</h4>\r\n<div id=\"empty-link-wrapper\">\r\n    <span id=\"empty-link-icon\"><i class=\"fas fa-link\"></i></span>\r\n    <span id=\"link-text\">Click here to add links</span>\r\n</div>";
+},"useData":true});
+
 /***/ })
-],[45]);
+],[51]);

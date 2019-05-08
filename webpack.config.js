@@ -17,7 +17,8 @@ module.exports = {
         login: './templates/js/login.js',
         forgot_password: './templates/js/forgot_password.js',
         dashboard: './templates/js/dashboard.js',
-        admin: './templates/js/admin.js'
+        admin: './templates/js/admin.js',
+        resources: './templates/js/resources.js'
     },
     output: {path: __dirname + '/templates/bundle', filename: 'js/[name].js', publicPath: '/templates/bundle/'},
     module: {
@@ -48,6 +49,7 @@ module.exports = {
         new HtmlWebpackPlugin({filename: 'login.html', chunks: ['vendors','login'], minify: {collapseWhitespace: true}, hash: true, template: './templates/login.html'}),
         new HtmlWebpackPlugin({filename: 'forgot_password.html', chunks: ['vendors','forgot_password'], minify: {collapseWhitespace: true}, hash: true, template: './templates/forgot_password.html'}),
         new HtmlWebpackPlugin({filename: 'dashboard.html', chunks: ['vendors','dashboard'], minify: {collapseWhitespace: true}, hash: true, template: './templates/dashboard.html'}),
+        new HtmlWebpackPlugin({filename: 'resources.html', chunks: ['vendors','resources'], minify: {collapseWhitespace: true}, hash: true, template: './templates/resources.html'}),
     ],
     resolve: {
         alias: {

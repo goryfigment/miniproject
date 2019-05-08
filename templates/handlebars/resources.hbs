@@ -1,0 +1,24 @@
+<h4>Files</h4>
+<table id="file-table">
+    <thead>
+        <tr>
+            <th class="sortable ascending" scope="col">ID</th>
+            <th class="sortable" scope="col">Author</th>
+            <th class="sortable" scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each this}}
+            <tr class="file" data-id="{{id}}">
+                <td class="file-id">{{id}}</td>
+                <td>{{username}}</td>
+                <td class="file-name">{{name}}</td>
+                <td class="action-wrapper">
+                    <a href="/templates/bundle/assets/resources/{{file_url}}" download><button id="download-button" title="Download"><i class="fas fa-file-download"></i></button></a>
+                    <button class="delete-button" title="Delete"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

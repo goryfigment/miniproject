@@ -46,12 +46,40 @@ class Lesson(models.Model):
     tags = JSONField()
     program = models.CharField(choices=(('ELAA', 'ELAA'), ('GED', 'GED')), max_length=255, default='ELAA')
     subject = JSONField()
-    level = models.IntegerField()
+    level = JSONField()
     block = models.IntegerField()
     standard = models.IntegerField()
+    lesson_work = models.CharField(max_length=1000, blank=True)
+    add_or_take = models.CharField(max_length=1000, blank=True)
 
     def get_name(self):
         return self.creator.first_name + ' ' + self.creator.last_name
 
     class Meta:
         db_table = "lesson"
+
+
+class File(models.Model):
+    creator = models.ForeignKey(User, default=None)
+    date = models.IntegerField(default=get_utc_epoch_time, blank=True)
+    name = models.CharField(max_length=100)
+    file_url = models.CharField(max_length=100)
+
+    def get_name(self):
+        return self.creator.first_name + ' ' + self.creator.last_name
+
+    class Meta:
+        db_table = "file"
+
+
+class Link(models.Model):
+    creator = models.ForeignKey(User, default=None)
+    date = models.IntegerField(default=get_utc_epoch_time, blank=True)
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=1000)
+
+    def get_name(self):
+        return self.creator.first_name + ' ' + self.creator.last_name
+
+    class Meta:
+        db_table = "link"

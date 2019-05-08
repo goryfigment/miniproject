@@ -1,0 +1,23 @@
+<h4>Links</h4>
+<table id="link-table">
+    <thead>
+        <tr>
+            <th class="sortable ascending" scope="col">ID</th>
+            <th class="sortable" scope="col">Author</th>
+            <th class="sortable" scope="col">Name</th>
+            <th class="admin_operation" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each this}}
+            <tr class="link" data-id="{{id}}">
+                <td class="link-id">{{id}}</td>
+                <td>{{username}}</td>
+                <td class="link-name"><a href="{{url}}" target="_blank">{{name}}</a></td>
+                <td class="admin_operation action-wrapper">
+                    <button class="delete-button" title="Delete"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

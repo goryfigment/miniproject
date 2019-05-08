@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render
 from miniproject.modules.base import get_base_url
 from django.http import HttpResponseRedirect
-from miniproject.models import Lesson
+from miniproject.models import Lesson, File, Link
 from miniproject.modules.base import models_to_dict, model_to_dict
 
 
@@ -105,3 +105,40 @@ def dashboard(request):
         return render(request, 'admin.html', data)
     else:
         return render(request, 'dashboard.html', data)
+
+
+def resources(request):
+    current_user = request.user
+
+    file_resources = File.objects.all()
+    resource_list = []
+
+    for current_file in file_resources:
+        full_name = current_file.get_name()
+        file_dict = model_to_dict(current_file)
+        file_dict['username'] = full_name
+        resource_list.append(file_dict)
+
+    links = Link.objects.all()
+    link_list = []
+
+    for current_link in links:
+        full_name = current_link.get_name()
+        link_dict = model_to_dict(current_link)
+        link_dict['username'] = full_name
+        link_list.append(link_dict)
+
+    data = {
+        'base_url': get_base_url(),
+        'username': current_user.username,
+        'name': current_user.first_name + ' ' + current_user.last_name,
+        'resources': json.dumps(resource_list),
+        'links': json.dumps(link_list),
+        'admin': json.dumps(current_user.username == 'admin')
+    }
+
+    # Only go to dashboard if user is logged in
+    if not current_user.is_authenticated():
+        return HttpResponseRedirect('/login/')
+
+    return render(request, 'resources.html', data)
