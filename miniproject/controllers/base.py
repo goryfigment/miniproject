@@ -3,7 +3,6 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.core import serializers
 from django.http import HttpResponseBadRequest
-from whey2ez.models import Transaction, Store
 
 
 def get_base_url():
@@ -54,13 +53,6 @@ def get_utc_epoch_time(days=0):
 
 def epoch_strftime(utc_time, regex):
     return time.strftime(regex, time.localtime(int(utc_time)))
-
-
-def get_transactions(boss_id, start_time=None, end_time=None, order='date'):
-    if start_time and end_time:
-        return models_to_dict(Transaction.objects.filter(boss=boss_id, date__range=(start_time, end_time)).order_by(order))
-    else:
-        return models_to_dict(Transaction.objects.filter(boss=boss_id).order_by(order))
 
 
 def validate_password(password, hashed_password):

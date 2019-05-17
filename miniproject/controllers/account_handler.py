@@ -132,7 +132,7 @@ def user_logout(request):
 
 @data_required(['username', 'base_url'], 'POST')
 def reset_password(request):
-    username = request.POST['username']
+    username = request.POST['username'].strip().lower()
 
     try:
         if '@' in username:
@@ -149,7 +149,7 @@ def reset_password(request):
     current_user.reset_date = int(round(time.time()))
     current_user.save()
 
-    from_email = "whey2ez@noreply.com"
+    from_email = "lvmc@noreply.com"
     to_email = current_user.email
     name = current_user.first_name
     link = request.POST['base_url'] + '/forgot_password?code=' + reset_link
