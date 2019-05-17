@@ -92,7 +92,7 @@ def register(request):
 @data_required(['username', 'password'], 'POST')
 def user_login(request):
     username = request.POST['username'].strip().lower()
-    password = request.POST['password'].strip().lower()
+    password = request.POST['password'].strip()
 
     if '@' in username:
         # Check Email
