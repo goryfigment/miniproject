@@ -32,7 +32,7 @@
                     <label for="program-input">Program</label>
                     <select id="program-input">
                         <option value="ELAA">ELAA</option>
-                        <option value="GED">GED</option>
+                        <option value="ABE">ABE</option>
                     </select>
                 </div>
                 <div>
@@ -106,28 +106,11 @@
             </div>
 
             <div id="file-section-4">
-                <div>
+                <div id="block-wrapper">
                     <label for="block-input">Block</label>
-                    <select id="block-input">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-                <div id="level-wrapper">
-                    <label>Level</label>
-                    <span class="one-line">
-                        <input type="checkbox" id="level-1-checkbox" data-type="columns" class="checkbox-input column-filter" value="1" style="display: none">
-                        <label for="level-1-checkbox" class="check-box-wrapper">
+                    <div style="width: 165px">
+                        <input type="checkbox" id="block-1-checkbox" data-type="columns" class="checkbox-input column-filter" value="1" style="display: none">
+                        <label for="block-1-checkbox" class="check-box-wrapper">
                             <span class="check-box">
                                 <svg width="12px" height="10px">
                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -135,8 +118,8 @@
                             </span>
                             <span class="check-box-label">1</span>
                         </label>
-                        <input type="checkbox" id="level-2-checkbox" data-type="columns" class="checkbox-input column-filter" value="2" style="display: none">
-                        <label for="level-2-checkbox" class="check-box-wrapper">
+                        <input type="checkbox" id="block-2-checkbox" data-type="columns" class="checkbox-input column-filter" value="2" style="display: none">
+                        <label for="block-2-checkbox" class="check-box-wrapper">
                             <span class="check-box">
                                 <svg width="12px" height="10px">
                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -144,8 +127,8 @@
                             </span>
                             <span class="check-box-label">2</span>
                         </label>
-                        <input type="checkbox" id="level-3-checkbox" data-type="columns" class="checkbox-input column-filter" value="3" style="display: none">
-                        <label for="level-3-checkbox" class="check-box-wrapper">
+                        <input type="checkbox" id="block-3-checkbox" data-type="columns" class="checkbox-input column-filter" value="3" style="display: none">
+                        <label for="block-3-checkbox" class="check-box-wrapper">
                             <span class="check-box">
                                 <svg width="12px" height="10px">
                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
@@ -153,8 +136,118 @@
                             </span>
                             <span class="check-box-label">3</span>
                         </label>
-                    </span>
-                    <br/>
+                        <input type="checkbox" id="block-4-checkbox" data-type="columns" class="checkbox-input column-filter" value="4" style="display: none">
+                        <label for="block-4-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">4</span>
+                        </label>
+                        <input type="checkbox" id="block-5-checkbox" data-type="columns" class="checkbox-input column-filter" value="5" style="display: none">
+                        <label for="block-5-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">5</span>
+                        </label>
+                        <input type="checkbox" id="block-6-checkbox" data-type="columns" class="checkbox-input column-filter" value="6" style="display: none">
+                        <label for="block-6-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">6</span>
+                        </label>
+                        <input type="checkbox" id="block-7-checkbox" data-type="columns" class="checkbox-input column-filter" value="7" style="display: none">
+                        <label for="block-7-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">7</span>
+                        </label>
+                        <input type="checkbox" id="block-8-checkbox" data-type="columns" class="checkbox-input column-filter" value="8" style="display: none">
+                        <label for="block-8-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">8</span>
+                        </label>
+                        <input type="checkbox" id="block-9-checkbox" data-type="columns" class="checkbox-input column-filter" value="9" style="display: none">
+                        <label for="block-9-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">9</span>
+                        </label>
+                        <input type="checkbox" id="block-10-checkbox" data-type="columns" class="checkbox-input column-filter" value="10" style="display: none">
+                        <label for="block-10-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">10</span>
+                        </label>
+                        <input type="checkbox" id="block-11-checkbox" data-type="columns" class="checkbox-input column-filter" value="11" style="display: none">
+                        <label for="block-11-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">11</span>
+                        </label>
+                        <input type="checkbox" id="block-12-checkbox" data-type="columns" class="checkbox-input column-filter" value="12" style="display: none">
+                        <label for="block-12-checkbox" class="check-box-wrapper">
+                            <span class="check-box">
+                                <svg width="12px" height="10px">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <span class="check-box-label">12</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="level-wrapper" style="width: 149px">
+                    <label>Level</label>
+                    <input type="checkbox" id="level-1-checkbox" data-type="columns" class="checkbox-input column-filter" value="1" style="display: none">
+                    <label for="level-1-checkbox" class="check-box-wrapper">
+                        <span class="check-box">
+                            <svg width="12px" height="10px">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                        </span>
+                        <span class="check-box-label">1</span>
+                    </label>
+                    <input type="checkbox" id="level-2-checkbox" data-type="columns" class="checkbox-input column-filter" value="2" style="display: none">
+                    <label for="level-2-checkbox" class="check-box-wrapper">
+                        <span class="check-box">
+                            <svg width="12px" height="10px">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                        </span>
+                        <span class="check-box-label">2</span>
+                    </label>
+                    <input type="checkbox" id="level-3-checkbox" data-type="columns" class="checkbox-input column-filter" value="3" style="display: none">
+                    <label for="level-3-checkbox" class="check-box-wrapper">
+                        <span class="check-box">
+                            <svg width="12px" height="10px">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                        </span>
+                        <span class="check-box-label">3</span>
+                    </label> <br/>
                     <input type="checkbox" id="level-4-checkbox" data-type="columns" class="checkbox-input column-filter" value="4" style="display: none">
                     <label for="level-4-checkbox" class="check-box-wrapper">
                         <span class="check-box">

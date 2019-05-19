@@ -12169,7 +12169,7 @@ $(document).ready(function() {
     //FILE UPLOAD//
 
     //LINK//
-    $(document).on('click', '#empty-link-wrapper', function (e) {
+    $(document).on('click', '#empty-link-wrapper, #link-button', function (e) {
         e.stopPropagation();
         var $overlay = $('#overlay');
         $overlay.addClass('active');
@@ -12374,7 +12374,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<h4>Links</h4>\r\n<table id=\"link-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th class=\"admin_operation\" scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
+  return "<div id=\"link-header-wrapper\">\r\n    <h4>Links</h4>\r\n    <button id=\"link-button\"><i class=\"fas fa-link\"></i></button>\r\n</div>\r\n\r\n<table id=\"link-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th class=\"admin_operation\" scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </tbody>\r\n</table>";
 },"useData":true});

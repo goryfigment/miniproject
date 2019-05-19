@@ -47,7 +47,7 @@ class Lesson(models.Model):
     program = models.CharField(choices=(('ELAA', 'ELAA'), ('GED', 'GED')), max_length=255, default='ELAA')
     subject = JSONField()
     level = JSONField()
-    block = models.IntegerField()
+    block = JSONField()
     standard = models.IntegerField()
     lesson_work = models.CharField(max_length=1000, blank=True)
     add_or_take = models.CharField(max_length=1000, blank=True)

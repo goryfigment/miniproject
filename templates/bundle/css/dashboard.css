@@ -171,7 +171,7 @@
 
 /* FILE UPLOAD */
 #overlay, #file-preview-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -357,13 +357,18 @@
     padding: 10px 0 20px;
 }
 
-#file-section-4 div:nth-of-type(1), #file-section-4 div:nth-of-type(3) {
-    width: 30%;
+#file-section-4 div:nth-of-type(1) {
+    width: 156px;
     text-align: center;
 }
 
 #file-section-4 div:nth-of-type(2) {
-    width: 40%;
+    width: 145px;
+    text-align: center;
+}
+
+#file-section-4 div:nth-of-type(3) {
+    width: 80px;
     text-align: center;
 }
 

@@ -20,7 +20,7 @@ def file_upload(request):
     program = request.POST['program']
     subject = json.loads(request.POST['subject'])
     level = json.loads(request.POST['level'])
-    block = request.POST['block']
+    block = json.loads(request.POST['block'])
     standard = request.POST['standard']
     file_type = request.POST['file_type']
     lesson_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', '..', 'templates', 'bundle', 'assets', 'lessons'))
@@ -114,7 +114,7 @@ def edit_lesson(request):
     lesson.program = request.POST['program']
     lesson.subject = json.loads(request.POST['subject'])
     lesson.level = json.loads(request.POST['level'])
-    lesson.block = request.POST['block']
+    lesson.block = json.loads(request.POST['block'])
     lesson.standard = request.POST['standard']
 
     lesson.save()

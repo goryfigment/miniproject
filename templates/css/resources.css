@@ -297,7 +297,7 @@
 
 /*OVERLAY*/
 #overlay{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -513,6 +513,26 @@
 #link-submit-button {
     color: #ffffff;
     background: #105aff;
+}
+
+#link-header-wrapper {
+    display: flex;
+}
+
+#link-button {
+    border: none;
+    outline: none;
+    color: #17f8ef;
+    background: none;
+    margin-left: auto;
+    font-size: 17px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+}
+
+#link-button:hover {
+    font-size: 19px
 }
 /*FILE UPLOAD*/
 

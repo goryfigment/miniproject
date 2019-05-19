@@ -125,7 +125,7 @@ $(document).ready(function() {
     //FILE UPLOAD//
 
     //LINK//
-    $(document).on('click', '#empty-link-wrapper', function (e) {
+    $(document).on('click', '#empty-link-wrapper, #link-button', function (e) {
         e.stopPropagation();
         var $overlay = $('#overlay');
         $overlay.addClass('active');

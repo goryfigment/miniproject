@@ -132,9 +132,11 @@ $(document).ready(function() {
         var $tags = $('#overlay').find('.tag');
         var $subjects = $('#file-section-3 input');
         var $levels = $('#level-wrapper input');
+        var $blocks = $('#block-wrapper input');
         var tags = [];
         var subjects = [];
         var levels = [];
+        var blocks = [];
         var fileType = 'docx';
 
         for (var i = 0; i < $tags.length; i++) {
@@ -158,6 +160,14 @@ $(document).ready(function() {
             }
         }
 
+        for (var b = 0; b < $blocks.length; b++) {
+            var $currentBlock = $($blocks[b]);
+
+            if($currentBlock.prop(("checked"))) {
+                blocks.push($currentBlock.val());
+            }
+        }
+
         if(globals.file.type == 'application/pdf') {
             fileType = 'pdf';
         }
@@ -169,7 +179,7 @@ $(document).ready(function() {
         formData.append('program', $('#program-input').val());
         formData.append('subject', JSON.stringify(subjects));
         formData.append('level', JSON.stringify(levels));
-        formData.append('block', $('#block-input').val());
+        formData.append('block', JSON.stringify(blocks));
         formData.append('standard', $('#standard-input').val());
 
         $.ajax({
@@ -413,7 +423,11 @@ $(document).ready(function() {
         }
 
         for (var s = 0; s < lesson['level'].length; s++) {
-            $('#file-section-4 input[value="' + lesson['level'][s] + '"]').prop('checked', true);
+            $('#level-wrapper input[value="' + lesson['level'][s] + '"]').prop('checked', true);
+        }
+
+        for (var b = 0; b < lesson['block'].length; b++) {
+            $('#block-wrapper input[value="' + lesson['block'][b] + '"]').prop('checked', true);
         }
 
         $('#file-name-input').val(lesson['name']);
@@ -431,9 +445,11 @@ $(document).ready(function() {
         var $tags = $('#overlay').find('.tag');
         var $subjects = $('#file-section-3 input');
         var $levels = $('#level-wrapper input');
+        var $blocks = $('#block-wrapper input');
         var tags = [];
         var subjects = [];
         var levels = [];
+        var blocks = [];
 
         for (var i = 0; i < $tags.length; i++) {
             var $currentTag = $($tags[i]);
@@ -456,6 +472,14 @@ $(document).ready(function() {
             }
         }
 
+        for (var b = 0; b < $blocks.length; b++) {
+            var $currentBlock = $($blocks[b]);
+
+            if($currentBlock.prop(("checked"))) {
+                blocks.push($currentBlock.val());
+            }
+        }
+
         if (globals.file !== null) {
             formData.append('file', globals.file);
         }
@@ -466,7 +490,7 @@ $(document).ready(function() {
         formData.append('program', $('#program-input').val());
         formData.append('subject', JSON.stringify(subjects));
         formData.append('level', JSON.stringify(levels));
-        formData.append('block', $('#block-input').val());
+        formData.append('block', JSON.stringify(blocks));
         formData.append('standard', $('#standard-input').val());
 
         $.ajax({

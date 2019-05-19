@@ -43,3 +43,9 @@ body {
     white-space: nowrap;
 }
 
+#brand-name {
+    position: absolute;
+    left: 7px;
+    bottom: 7px;
+    font-style: italic;
+}
