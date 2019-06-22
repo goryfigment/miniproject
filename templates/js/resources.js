@@ -27,6 +27,7 @@ function init() {
     }
 
     if(globals.admin) {
+        $('#users-link').show();
         $('body').addClass('admin');
     }
 }
@@ -55,6 +56,10 @@ $(document).ready(function() {
         window.location.replace(globals.base_url + '/logout');
     });
 
+    $(document).on('click', '#users-link', function () {
+        window.location.replace(globals.base_url + '/users');
+    });
+
     //OVERLAY//
     $(document).on('click', 'body, #file-cancel-button, #link-cancel-button, #delete-cancel-button', function () {
         var $overlay = $('#overlay');
@@ -65,7 +70,7 @@ $(document).ready(function() {
         $overlay.removeClass('delete');
     });
 
-    $(document).on('click', '#upload-wrapper, #link-overlay-wrapper, #upload-wrapper', function (e) {
+    $(document).on('click', '#edit-user-wrapper', function (e) {
         e.stopPropagation();
     });
     //OVERLAY//

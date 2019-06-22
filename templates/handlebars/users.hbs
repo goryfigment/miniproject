@@ -1,0 +1,26 @@
+<h4>Users</h4>
+<table id="user-table">
+    <thead>
+        <tr>
+            <th class="sortable ascending" scope="col">ID</th>
+            <th class="sortable" scope="col">Name</th>
+            <th class="sortable" scope="col">Username</th>
+            <th class="sortable" scope="col">Email</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each this}}
+            <tr class="user" data-id="{{id}}" data-username="{{username}}">
+                <td class="user-id">{{id}}</td>
+                <td>{{first_name}} {{last_name}}</td>
+                <td>{{username}}</td>
+                <td>{{email}}</td>
+                <td class="action-wrapper">
+                    <button id="edit-button" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button id="delete-button" title="Delete"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

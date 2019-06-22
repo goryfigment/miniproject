@@ -1,9 +1,10 @@
 import json
 from django.shortcuts import render
-from miniproject.modules.base import get_base_url
 from django.http import HttpResponseRedirect
-from miniproject.models import Lesson, File, Link
-from miniproject.modules.base import models_to_dict, model_to_dict
+from miniproject.models import Lesson, File, Link, User
+from miniproject.modules.base import get_base_url, model_to_dict
+from miniproject.controllers.base import array_to_dict
+from django.contrib.auth import logout
 
 
 def error_page(request):
@@ -90,10 +91,16 @@ def dashboard(request):
         lesson['username'] = full_name
         lesson_list.append(lesson)
 
+    user_name = ''
+    try:
+        user_name = current_user.first_name + ' ' + current_user.last_name
+    except:
+        logout(request)
+
     data = {
         'base_url': get_base_url(),
         'username': current_user.username,
-        'name': current_user.first_name + ' ' + current_user.last_name,
+        'name': user_name,
         'lessons': json.dumps(lesson_list)
     }
 
@@ -128,10 +135,16 @@ def resources(request):
         link_dict['username'] = full_name
         link_list.append(link_dict)
 
+    user_name = ''
+    try:
+        user_name = current_user.first_name + ' ' + current_user.last_name
+    except:
+        logout(request)
+
     data = {
         'base_url': get_base_url(),
         'username': current_user.username,
-        'name': current_user.first_name + ' ' + current_user.last_name,
+        'name': user_name,
         'resources': json.dumps(resource_list),
         'links': json.dumps(link_list),
         'admin': json.dumps(current_user.username == 'admin')
@@ -142,3 +155,36 @@ def resources(request):
         return HttpResponseRedirect('/login/')
 
     return render(request, 'resources.html', data)
+
+
+def users(request):
+    current_host = request.user
+
+    all_users = User.objects.filter(enabled=True)
+    user_list = []
+
+    for current_user in all_users:
+        current_user = model_to_dict(current_user)
+        current_user.pop('password', None)
+        user_list.append(current_user)
+
+    user_dict = array_to_dict(user_list)
+
+    user_name = ''
+    try:
+        user_name = current_host.first_name + ' ' + current_host.last_name
+    except:
+        logout(request)
+
+    data = {
+        'base_url': get_base_url(),
+        'username': current_host.username,
+        'name': user_name,
+        'users': json.dumps(user_dict)
+    }
+
+    # Only go to dashboard if user is logged in
+    if not current_host.is_authenticated():
+        return HttpResponseRedirect('/login/')
+
+    return render(request, 'users.html', data)

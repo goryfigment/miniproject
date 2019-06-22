@@ -58,6 +58,10 @@ $(document).ready(function() {
         window.location.replace(globals.base_url + '/resources');
     });
 
+    $(document).on('click', '#users-link', function () {
+        window.location.replace(globals.base_url + '/users');
+    });
+
     $(document).on('keyup', '#tag-input', function (e) {
         var keycode = e.keyCode;
 

@@ -19,14 +19,6 @@
     display: flex;
 }
 
-.admin #account-wrapper {
-    left: 170px !important;
-}
-
-#users-link {
-    display: none;
-}
-
 #icon-wrapper {
     padding: 20px 60px;
     font-size: 26px;
@@ -106,12 +98,11 @@
 }
 
 /* ACCOUNT WRAPPER */
-
 #account-wrapper {
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
     position: absolute;
     top: 58px;
-    left: 110px;
+    left: 170px;
     width: 200px;
     background: #242323;
     display: none;
@@ -122,7 +113,7 @@
     padding: 20px 30px;
 }
 
-#empty-lesson-wrapper {
+#empty-user-wrapper {
     text-align: center;
     border: 1.5px dashed #eb6666;
     height: calc(100% - 85px);
@@ -134,7 +125,7 @@
         justify-content: center;
 }
 
-#empty-lesson-icon {
+#empty-user-icon {
     font-size: 170px;
     color: #ff7474;
 }
@@ -177,69 +168,33 @@
 }
 /* ACCOUNT WRAPPER */
 
-/* BODY */
+/*USER TABLE*/
 #body-wrapper {
-    display: -ms-flexbox;
-    display: flex;
-}
-
-#file-wrapper {
+    width: 90%;
     margin: 0 auto;
-    width: calc(100vw - 500px);
-    min-width: 700px;
-    height: calc(100vh - 88px);
-    box-shadow: inset 0 0 4px 1px rgba(141, 141, 141, 0.2), 0 3px 24px rgba(100, 100, 100, 0.2);
-    padding: 0 45px;
 }
 
-#link-wrapper {
-    width: 300px;
-    margin: 0 auto;
-    box-shadow: inset 0 0 4px 1px rgba(141, 141, 141, 0.2), 0 3px 24px rgba(100, 100, 100, 0.2);
-    padding: 0 10px;
-}
-
-#link-table {
+#user-table {
     width: 100%;
 }
 
-#link-table thead {
-    color: #45eced;
-    font-size: 14px;
-}
-
-#link-table tbody tr {
-    text-align: center;
-    height: 52px;
-    background: #151515;
-    color: #ffffff;
-}
-
-#link-table tbody tr td {
-    height: 65px;
-}
-
-#file-table {
-    width: 100%;
-}
-
-#file-table thead {
+#user-table thead {
     color: #ffffff;
     font-size: 14px;
 }
 
-#file-table tbody tr {
+#user-table tbody tr {
     text-align: center;
     height: 52px;
     background: #151515;
     color: #f67a7a;
 }
 
-#file-table tbody tr td {
+#user-table tbody tr td {
     height: 65px;
 }
 
-#file-table .action-wrapper {
+#user-table .action-wrapper {
     width: 175px;
 }
 
@@ -257,78 +212,22 @@
     font-size: 21px;
 }
 
-#file-table .tag {
+#user-table .tag {
     font-size: 13px;
     padding: 3px 8px;
     margin-top: 10px;
 }
 
-#download-button {
-    color: #53ffb9;
-}
-
-#admin #edit-button {
+#edit-button {
     display: inline-block;
     color: #ffff73;
 }
 
-.link a {
-    color: #10ffe9;
+#delete-button {
+    display: inline-block;
+    color: #f67272;
 }
-/* BODY */
-
-/* EMPTY */
-#empty-resource-wrapper {
-    text-align: center;
-    border: 1.5px dashed #c8c8c8;
-    height: calc(100% - 85px);
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-        align-items: center;
-    -ms-flex-pack: center;
-        justify-content: center;
-}
-
-#empty-resource-icon {
-    font-size: 170px;
-    color: #ff6c6c;
-}
-
-#empty-link-wrapper {
-    text-align: center;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex-pack: center;
-        justify-content: center;
-    height: calc(100% - 83px);
-    color: #ff7474;
-}
-
-#link-text {
-    font-size: 19px;
-    color: white;
-}
-
-#empty-link-wrapper {
-    border: solid 1px #2d5149;
-    cursor: pointer;
-    transition: all 150ms ease;
-}
-
-#empty-link-wrapper:hover {
-    background: #3f3f3f;
-    border: solid 1px #808080;
-}
-
-#empty-link-icon {
-    font-size: 90px;
-    color: #4dffff;
-    margin-bottom: 12px;
-}
-/* EMPTY */
+/*USER TABLE*/
 
 /*OVERLAY*/
 #overlay{
@@ -363,17 +262,17 @@
 }
 
 #overlay input {
-    background-color: #e3a4a4;
+    background-color: #8b9cff;
     border: none;
     font-size: 15px;
     outline: none;
     font-weight: 400;
     letter-spacing: -0.025rem;
     line-height: 1.25rem;
-    margin: 2px 2px 2px 0;
     color: #ffffff;
     padding: 10px;
-    width: 250px;
+    width: 200px;
+    margin: 7px;
 }
 
 #overlay select {
@@ -399,193 +298,78 @@
 }
 /*OVERLAY*/
 
-/*DRAGOVER*/
-.resources #dragover-wrapper, .link #dragover-wrapper {
-    display: none;
-}
-
-#dragover-wrapper {
-    background: #fb3939;
-    border-radius: 3px;
-    padding: 10px;
+/*EDIT USER*/
+.edit-user #edit-user-wrapper {
     display: block;
 }
 
-#dragover-container {
-    padding: 24px 55px;
-    position: relative;
-    border: dashed;
-}
-
-#dragover-container #file-icons-wrapper {
-    text-align: center;
-    position: absolute;
-    font-size: 55px;
-    top: -54px;
-    left: 95px;
-}
-
-#file-icons-wrapper span:nth-child(1) {
-    position: absolute;
-    transform: rotate(27deg);
-    left: 44px;
-    top: 8px;
-}
-
-#file-icons-wrapper span:nth-child(2) {
-    position: absolute;
-}
-
-#file-icons-wrapper span:nth-child(3) {
-    position: absolute;
-    transform: rotate(-27deg);
-    right: 4px;
-    top: 7px;
-}
-
-#dragover-container h4 {
-    text-align: center;
-    font-size: 20px;
-    margin: 10px 0;
-}
-
-#dragover-container p {
-    font-size: 13px;
-    text-align: center;
-    margin: 17px 0;
-}
-/*DRAGOVER*/
-
-/*FILE UPLOAD*/
-.resources #upload-wrapper, .link #link-overlay-wrapper {
-    display: block;
-}
-
-#upload-wrapper, #link-overlay-wrapper {
+#edit-user-wrapper {
     display: none;
 }
 
-#upload-container, #link-container {
-    background: #ff5252;
+#edit-user-wrapper textarea {
+    width: 336px;
+    background-color: #95caef;
+}
+
+.edit-user #edit-user-wrapper {
+    display: block;
+}
+
+#edit-user-container {
+    background: #6563d3;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     padding: 10px;
 }
 
-#upload-details-wrapper, #link-details-wrapper {
+#edit-user-details-wrapper {
     position: relative;
-    border: dashed;
-    width: 400px;
+    width: 465px;
 }
 
-#upload-container #file-icon, #link-icon {
-    font-size: 80px;
+#edit-user-wrapper #edit-user-icon {
+    font-size: 64px;
     position: absolute;
-    top: -43px;
-    left: 13px;
+    top: -60px;
+    right: 4px;
+    z-index: 1;
+    color: #b6b4ff;
 }
 
-#file-input {
-    display: none;
-}
-
-#link-input {
-    width: 340px !important;
-}
-
-#file-section-1, #link-section-1 {
-    padding: 13px 0 19px 87px;
-}
-
-#link-section-1 {
-    padding: 13px 0 0 87px;
-}
-
-#link-section-2 {
-    margin: 5px 20px 15px 20px;
-}
-
-#upload-submit-wrapper {
-    width: 404.8px;
+#edit-user-submit-wrapper {
     padding: 10px;
     text-align: right;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    background: #ff6e6e;
+    background: #7674f6;
 }
 
-#link-submit-wrapper {
-    width: 404.8px;
-    padding: 10px;
-    text-align: right;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background: #ff6e6e;
+#edit-user-submit-wrapper button {
+    color: white;
+    background: #4846cf;
 }
 
-#file-cancel-button, #link-cancel-button {
-    color: #fff;
-    background: transparent;
-}
-
-#file-cancel-button:hover, #link-cancel-button:hover {
-    text-decoration: underline;
-}
-
-#link-overlay-wrapper input {
-    background-color: #70a3ff;
-}
-
-#link-overlay-wrapper #link-container {
-    background: #2166ff;
-}
-
-#link-overlay-wrapper #link-submit-wrapper {
-    background: #4b8bff;
-}
-
-#file-submit-button {
-    color: #ffffff;
-    background: #fd3939;
-}
-
-#link-submit-button {
-    color: #ffffff;
-    background: #105aff;
-}
-
-#link-header-wrapper {
+#edit-user-section-2, #edit-user-section-3, #edit-user-section-4 {
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
 }
 
-#link-button {
-    border: none;
-    outline: none;
-    color: #17f8ef;
-    background: none;
-    margin-left: auto;
-    font-size: 17px;
-    padding: 0 20px;
-    cursor: pointer;
-    transition: all 150ms ease-out;
+.error {
+    display: none;
+    font-size: 12px;
+    margin-left: 10px;
+    margin-top: -6px;
+    max-width: 225px;
+    color: #ff5a5a;
 }
-
-#link-button:hover {
-    font-size: 19px
-}
-/*FILE UPLOAD*/
+/*EDIT USER*/
 
 /*DELETE*/
-.delete-button {
-    display: none;
-}
-
-.admin .delete-button {
-    display: inline-block;
-    color: #f67272;
-}
-
 #overlay.delete {
     display: -ms-flexbox;
     display: flex;
@@ -629,13 +413,3 @@
     color: white;
 }
 /*DELETE*/
-
-/*ADMIN*/
-.admin_operation {
-    display: none;
-}
-
-.admin .admin_operation {
-    display: table-cell;
-}
-/*ADMIN*/

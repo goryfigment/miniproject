@@ -17,6 +17,7 @@ class User(AbstractBaseUser):
     reset_date = models.IntegerField(default=None, blank=True, null=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)
+    enabled = models.BooleanField(default=True)
     # password = models.CharField(max_length=255)
     # last_login = models.DateTimeField(default=timezone.now, blank=True)
 

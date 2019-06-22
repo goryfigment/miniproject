@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from miniproject.controllers import site, account_handler, dashboard, resource
+from miniproject.controllers import site, account_handler, dashboard, resource, user
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^forgot_password/$', site.forgot_password, name='forgot_password'),
     url(r'^dashboard/$', site.dashboard, name='dashboard'),
     url(r'^resources/$', site.resources, name='resources'),
+    url(r'^users/$', site.users, name='users'),
 
     # Account Handler
     url(r'^account/register/$', account_handler.register, name='register'),
@@ -32,4 +33,8 @@ urlpatterns = [
     url(r'^resource_upload/$', resource.resource_upload, name='resource_upload'),
     url(r'^create_link/$', resource.create_link, name='create_link'),
     url(r'^delete_resource/$', resource.delete_resource, name='delete_resource'),
+
+    # User
+    url(r'^edit_user/$', user.edit_user, name='edit_user'),
+    url(r'^delete_user/$', user.delete_user, name='delete_user'),
 ]

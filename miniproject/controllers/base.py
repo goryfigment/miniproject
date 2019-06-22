@@ -61,3 +61,11 @@ def validate_password(password, hashed_password):
 
 def create_password(password):
     return bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
+
+
+def array_to_dict(array):
+    dict_obj = {}
+    for item in array:
+        dict_obj[item['id']] = item
+
+    return dict_obj

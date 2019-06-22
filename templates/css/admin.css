@@ -17,6 +17,10 @@
     height: 100%;
 }
 
+#account-wrapper {
+    left: 170px !important;
+}
+
 #activity-table {
     width: 100%;
 }
@@ -62,7 +66,6 @@
 }
 
 /*EMPTY ACTIVITY*/
-
 #empty-activity-wrapper {
     text-align: center;
     display: flex;
@@ -76,7 +79,6 @@
     font-size: 19px;
     color: white;
 }
-
 /*EMPTY ACTIVITY*/
 
 #admin #edit-button {

@@ -1,4 +1,4 @@
-webpackJsonp([2],[
+webpackJsonp([3],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12039,46 +12039,32 @@ module.exports = exports['default'];
 /* 48 */,
 /* 49 */,
 /* 50 */,
-/* 51 */
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-__webpack_require__(52);
+__webpack_require__(58);
 __webpack_require__(11);
+
 __webpack_require__(6);
 var $ = __webpack_require__(4);
 __webpack_require__(12);
+var userTemplate = __webpack_require__(59);
 
-var resourceTemplate = __webpack_require__(53);
-var emptyResourceTemplate = __webpack_require__(54);
-var linksTemplate = __webpack_require__(55);
-var emptyLinksTemplate = __webpack_require__(56);
 
 function init() {
-    var $fileWrapper = $('#file-wrapper');
-    var $linkWrapper = $('#link-wrapper');
-
-    if(globals.resources.length) {
-        $fileWrapper.append(resourceTemplate(globals.resources));
-    } else {
-        $fileWrapper.append(emptyResourceTemplate(globals.resources));
-    }
-
-    if(globals.links.length) {
-        $linkWrapper.append(linksTemplate(globals.links));
-    } else {
-        $linkWrapper.append(emptyLinksTemplate(globals.links));
-    }
-
-    if(globals.admin) {
-        $('#users-link').show();
-        $('body').addClass('admin');
-    }
+    var $userWrapper = $('#user-wrapper');
+    $userWrapper.append(userTemplate(globals.users));
 }
 
-
-function capitalize(value) {
-    return value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+function checkEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
 }
 
 $(document).ready(function() {
@@ -12092,12 +12078,12 @@ $(document).ready(function() {
         $(this).closest('#nav-wrapper').toggleClass('account-active');
     });
 
-    $(document).on('click', '#resources-link', function () {
-        window.location.replace(globals.base_url + '/resources');
-    });
-
     $(document).on('click', '#logout-link', function () {
         window.location.replace(globals.base_url + '/logout');
+    });
+
+    $(document).on('click', '#resources-link', function () {
+        window.location.replace(globals.base_url + '/resources');
     });
 
     $(document).on('click', '#users-link', function () {
@@ -12105,221 +12091,213 @@ $(document).ready(function() {
     });
 
     //OVERLAY//
-    $(document).on('click', 'body, #file-cancel-button, #link-cancel-button, #delete-cancel-button', function () {
+    $(document).on('click', 'body, #edit-user-cancel-button, #delete-cancel-button', function () {
         var $overlay = $('#overlay');
-        $overlay.removeClass('resources');
         $overlay.removeClass('active');
-        $overlay.removeClass('link');
-        $overlay.removeClass('drop');
+        $overlay.removeClass('edit-user');
         $overlay.removeClass('delete');
     });
 
-    $(document).on('click', '#edit-user-wrapper', function (e) {
+    $(document).on('click', '#edit-user-wrapper, #delete-wrapper', function (e) {
         e.stopPropagation();
     });
     //OVERLAY//
 
-    //FILE UPLOAD//
-    $('body').on({
-        'dragover dragenter': function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            $('#overlay').addClass('active');
-        }
-    });
-
-    $('#overlay').on({
-        'dragexit dragleave': function() {
-            $('#overlay').removeClass('active');
-        },
-        'drop': function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var file = e.originalEvent.dataTransfer.files[0];
-            $('#overlay').addClass('resources');
-            globals.file = file;
-        }
-    });
-
-    $(document).on('click', '#file-submit-button', function () {
-        var formData = new FormData();
-        var fileType = globals.file.name.replace(/^.*\./, '');
-        var $fileNameInput = $('#file-name-input');
-
-        formData.append('file', globals.file);
-        formData.append('file_type', fileType);
-        formData.append('file_name', $fileNameInput.val());
-
-        $.ajax({
-            headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/resource_upload/',
-            data: formData,
-            type: "POST",
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                console.log(JSON.stringify(response));
-                $('#file-cancel-button').click();
-                var $fileWrapper = $('#file-wrapper');
-                globals.resources = response['resources'];
-                $fileWrapper.empty();
-                $fileWrapper.append(resourceTemplate(globals.resources));
-                $fileNameInput.val('');
-            }
-        });
-    });
-    //FILE UPLOAD//
-
-    //LINK//
-    $(document).on('click', '#empty-link-wrapper, #link-button', function (e) {
+    //EDIT USER//
+    $(document).on('click', '#edit-button', function (e) {
+        var $this = $(this);
         e.stopPropagation();
         var $overlay = $('#overlay');
         $overlay.addClass('active');
-        $overlay.addClass('link');
+        $overlay.addClass('edit-user');
+
+        var user = globals.users[$this.closest('.user').attr('data-id')];
+
+        $('#first-name').val(user['first_name']);
+        $('#last-name').val(user['last_name']);
+        $('#email').val(user['email']);
+        $('#username-input').val(user['username']);
+        $('#password1').val('');
+        $('#password2').val('');
+        $('#edit-user-submit-button').attr('data-id', user['id']);
     });
 
-    $(document).on('click', '#link-submit-button', function () {
-        var $linkInput = $('#link-input');
-        var $linkNameInput = $('#link-name-input');
+    $(document).on('click', '#edit-user-submit-button', function () {
+        var $errors = $('.error');
+        $errors.hide();
+
+        var username = $('#username-input').val();
+        var password1 = $('#password1').val();
+        var password2 = $('#password2').val();
+        var email = $('#email').val();
+        var firstName = $('#first-name').val();
+        var lastName = $('#last-name').val();
+        var id = $(this).attr('data-id');
+
+        // Check if username is greater than 2 characters or less than 16
+        if(username.length <= 2 || username.length >= 16) {
+            var $error = $('.error.username');
+            $error.text('Username must be between 3 to 15 characters.');
+            $error.show();
+        }
+
+        //Check if password matches
+        if(password1 != password2) {
+            $error = $('.error.password');
+            $error.text('Confirmed password must match.');
+            $error.show();
+        }
+
+        // Check if password is 8 characters or more.
+        if(password1 != '' && password1.length <= 7) {
+            $error = $('.error.password');
+            $error.text('Password must be 8 characters or more.');
+            $error.show();
+        }
+
+        if(!checkEmail(email)) {
+            $error = $('.error.email');
+            $error.text('Must be a valid email.');
+            $error.show();
+        }
+
+        if(firstName.length == 0) {
+            $error = $('.error.first-name');
+            $error.show();
+        }
+
+        if(lastName.length == 0) {
+            $error = $('.error.last-name');
+            $error.show();
+        }
+
+        var postData = {
+            'id': id,
+            'username': username,
+            'email': email,
+            'password': password1,
+            'first_name': firstName,
+            'last_name': lastName
+        };
 
         $.ajax({
             headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/create_link/',
-            data: {'url': $linkInput.val(), 'name': $linkNameInput.val()},
+            url: globals.base_url + '/edit_user/',
+            data: postData,
             dataType: 'json',
             type: "POST",
             success: function (response) {
-                console.log(JSON.stringify(response));
-                $('#link-cancel-button').click();
-                var $linkWrapper = $('#link-wrapper');
-                globals.links = response['links'];
-                $linkWrapper.empty();
-                $linkWrapper.append(linksTemplate(globals.links));
-                $linkInput.val('');
-                $linkNameInput.val('');
+                globals.users = response['users'];
+                var $userWrapper = $('#user-wrapper');
+                $userWrapper.empty();
+                $userWrapper.append(userTemplate(globals.users));
+
+                $('#edit-user-cancel-button').click();
+                //window.location.replace(globals.base_url + '/dashboard');
+            },
+            error: function (response) {
+                console.log(JSON.stringify(response.responseJSON));
+                var error = response.responseJSON['error_msg'];
+
+                if (error == 'Must have an access code.') {
+                    var $error = $('.error.code');
+                    $error.text(error);
+                    $error.show();
+                } else if(error == 'Invalid access code.') {
+                    $error = $('.error.code');
+                    $error.text(error);
+                    $error.show();
+                }
+
+                if (error == 'Username must be between 3 to 15 characters.') {
+                    $error = $('.error.code');
+                    $error.text(error);
+                    $error.show();
+                } else if(error == 'Username exists.') {
+                    $error = $('.error.username');
+                    $error.text('Username is not available.');
+                    $error.show();
+                }
+
+                if (error == 'Password must be 8 characters or more.') {
+                    $error = $('.error.password');
+                    $error.text(error);
+                    $error.show();
+
+                } else if(error == 'Invalid password.') {
+                    $error = $('.error.password');
+                    $error.text('Password must contain letter and digit.');
+                    $error.show();
+                }
+
+                if(error == 'Invalid email.') {
+                    $error = $('.error.email');
+                    $error.text('Must be a valid email.');
+                    $error.show();
+                } else if(error == 'Email exists.') {
+                    $error = $('.error.email');
+                    $error.text('Email is not available.');
+                    $error.show();
+                }
+
+                if(error == 'Must have a first name.') {
+                    $error = $('.error.email');
+                    $error.show();
+                }
+
+                if(error == 'Must have a last name.') {
+                    $error = $('.error.email');
+                    $error.show();
+                }
             }
         });
     });
-    //LINK//
+    //EDIT USER//
 
     //DELETE//
     $(document).on('click', '#delete-wrapper', function (e) {
         e.stopPropagation();
     });
 
-    $(document).on('click', '.delete-button', function (e) {
+    $(document).on('click', '#delete-button', function (e) {
         e.stopPropagation();
         var $this = $(this);
-
-        var $file = $this.closest('.file');
-        var $link = $this.closest('.link');
-
-        if($file.length) {
-            var type = 'file';
-            var id = $file.attr('data-id');
-        } else {
-            type = 'link';
-            id = $link.attr('data-id');
-        }
-
-        var $deleteSubmitButton = $('#delete-submit-button');
+        var $user = $this.closest('.user');
         var $overlay = $('#overlay');
 
-        $deleteSubmitButton.attr('data-id', id);
-        $deleteSubmitButton.attr('data-type', type);
-
-        $('#delete-resource-id').text(id);
-        $('#delete-type').text(type);
+        $('#delete-username').text($user.attr('data-username'));
+        $('#delete-submit-button').attr('data-id', $user.attr('data-id'));
 
         $overlay.addClass('delete');
-    });
-
-    $(document).on('click', '#delete-cancel-button', function (e) {
-        e.stopPropagation();
-        var $overlay = $('#overlay');
-        $overlay.removeClass('active');
-        $overlay.removeClass('delete');
     });
 
     $(document).on('click', '#delete-submit-button', function () {
         $.ajax({
             headers: {"X-CSRFToken": $('input[name="csrfmiddlewaretoken"]').attr('value')},
-            url: globals.base_url + '/delete_resource/',
-            data: {'type': $(this).attr('data-type'), 'id': $(this).attr('data-id')},
+            url: globals.base_url + '/delete_user/',
+            data: {'id': $(this).attr('data-id')},
             dataType: 'json',
             type: "POST",
             success: function (response) {
                 $('#delete-cancel-button').click();
-                globals.resources = response['resources'];
-                globals.links = response['links'];
-
-                var $fileWrapper = $('#file-wrapper');
-                var $linkWrapper = $('#link-wrapper');
-
-                $fileWrapper.empty();
-                $linkWrapper.empty();
-
-                if(globals.resources.length) {
-                    $fileWrapper.append(resourceTemplate(globals.resources));
-                } else {
-                    $fileWrapper.append(emptyResourceTemplate(globals.resources));
-                }
-
-                if(globals.links.length) {
-                    $linkWrapper.append(linksTemplate(globals.links));
-                } else {
-                    $linkWrapper.append(emptyLinksTemplate(globals.links));
-                }
+                globals.users = response['users'];
+                var $userWrapper = $('#user-wrapper');
+                $userWrapper.empty();
+                $userWrapper.append(userTemplate(globals.users));
             }
         });
     });
     //DELETE//
-
-    //SEARCH//
-    $(document).on('keyup', '#search-input', function () {
-        var value = $(this).val().replace(' ', '').replace('-', '').toLowerCase();
-        var $items = $('#file-table').find('tbody tr');
-
-        for (var i = 0; i < $items.length; i++) {
-            var $currentItem = $($items[i]);
-            var currentName = $currentItem.find('.file-name').text().replace(' ', '').replace('-', '').toLowerCase();
-            var currentId = $currentItem.find('.file-id').text();
-
-            if(currentName.indexOf(value) !== -1 || currentId.indexOf(value) !== -1) {
-                $currentItem.show();
-            } else {
-                $currentItem.hide();
-            }
-        }
-
-        var $links = $('#link-table').find('tbody tr');
-
-        for (var l = 0; l < $links.length; l++) {
-            $currentItem = $($links[l]);
-            currentName = $currentItem.find('.link-name a').text().replace(' ', '').replace('-', '').toLowerCase();
-            currentId = $currentItem.find('.link-id').text();
-
-            if(currentName.indexOf(value) !== -1 || currentId.indexOf(value) !== -1) {
-                $currentItem.show();
-            } else {
-                $currentItem.hide();
-            }
-        }
-    });
-    //SEARCH//
 });
 
 /***/ }),
-/* 52 */
+/* 58 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 53 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(3);
@@ -12327,72 +12305,28 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "            <tr class=\"file\" data-id=\""
+  return "            <tr class=\"user\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n                <td class=\"file-id\">"
+    + "\" data-username=\""
+    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
+    + "\">\r\n                <td class=\"user-id\">"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "</td>\r\n                <td>"
+    + alias4(((helper = (helper = helpers.first_name || (depth0 != null ? depth0.first_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"first_name","hash":{},"data":data}) : helper)))
+    + " "
+    + alias4(((helper = (helper = helpers.last_name || (depth0 != null ? depth0.last_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"last_name","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td>"
     + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
-    + "</td>\r\n                <td class=\"file-name\">"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</td>\r\n                <td class=\"action-wrapper\">\r\n                    <a href=\"/templates/bundle/assets/resources/"
-    + alias4(((helper = (helper = helpers.file_url || (depth0 != null ? depth0.file_url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"file_url","hash":{},"data":data}) : helper)))
-    + "\" download><button id=\"download-button\" title=\"Download\"><i class=\"fas fa-file-download\"></i></button></a>\r\n                    <button class=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
+    + "</td>\r\n                <td>"
+    + alias4(((helper = (helper = helpers.email || (depth0 != null ? depth0.email : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"email","hash":{},"data":data}) : helper)))
+    + "</td>\r\n                <td class=\"action-wrapper\">\r\n                    <button id=\"edit-button\" title=\"Edit\"><i class=\"fas fa-edit\"></i></button>\r\n                    <button id=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<h4>Files</h4>\r\n<table id=\"file-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
+  return "<h4>Users</h4>\r\n<table id=\"user-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th class=\"sortable\" scope=\"col\">Username</th>\r\n            <th class=\"sortable\" scope=\"col\">Email</th>\r\n            <th scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </tbody>\r\n</table>";
-},"useData":true});
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(3);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h4>Files</h4>\r\n<div id=\"empty-resource-wrapper\">\r\n    <span id=\"empty-resource-icon\"><i class=\"fas fa-file\"></i></span>\r\n    <span id=\"drag-drop-text\">Drag & Drop</span>\r\n</div>";
-},"useData":true});
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(3);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "            <tr class=\"link\" data-id=\""
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n                <td class=\"link-id\">"
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "</td>\r\n                <td>"
-    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
-    + "</td>\r\n                <td class=\"link-name\"><a href=\""
-    + alias4(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
-    + "\" target=\"_blank\">"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</a></td>\r\n                <td class=\"admin_operation action-wrapper\">\r\n                    <button class=\"delete-button\" title=\"Delete\"><i class=\"fas fa-trash\"></i></button>\r\n                </td>\r\n            </tr>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<div id=\"link-header-wrapper\">\r\n    <h4>Links</h4>\r\n    <button id=\"link-button\"><i class=\"fas fa-link\"></i></button>\r\n</div>\r\n\r\n<table id=\"link-table\">\r\n    <thead>\r\n        <tr>\r\n            <th class=\"sortable ascending\" scope=\"col\">ID</th>\r\n            <th class=\"sortable\" scope=\"col\">Author</th>\r\n            <th class=\"sortable\" scope=\"col\">Name</th>\r\n            <th class=\"admin_operation\" scope=\"col\">Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </tbody>\r\n</table>";
-},"useData":true});
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(3);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h4>Links</h4>\r\n<div id=\"empty-link-wrapper\">\r\n    <span id=\"empty-link-icon\"><i class=\"fas fa-link\"></i></span>\r\n    <span id=\"link-text\">Click here to add links</span>\r\n</div>";
 },"useData":true});
 
 /***/ })
-],[51]);
+],[57]);
