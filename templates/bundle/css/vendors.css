@@ -44,7 +44,7 @@ body {
 }
 
 #brand-name {
-    position: absolute;
+    position: fixed;
     left: 7px;
     bottom: 7px;
     font-style: italic;
