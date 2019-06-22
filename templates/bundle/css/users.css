@@ -14,7 +14,11 @@
 
 .sortable.descending:after{
     content: "\25B4";
-}#header-wrapper {
+}body {
+    min-height: calc(100vh - 10px) !important;
+}
+
+#header-wrapper {
     display: -ms-flexbox;
     display: flex;
 }
@@ -176,6 +180,7 @@
 
 #user-table {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 #user-table thead {
