@@ -80,9 +80,11 @@ def forgot_password(request):
 
 def dashboard(request):
     current_user = request.user
+    if not current_user.enabled:
+        logout(request)
+        return HttpResponseRedirect('/')
 
     lessons = Lesson.objects.all()
-
     lesson_list = []
 
     for lesson in lessons:
@@ -116,6 +118,9 @@ def dashboard(request):
 
 def resources(request):
     current_user = request.user
+    if not current_user.enabled:
+        logout(request)
+        return HttpResponseRedirect('/')
 
     file_resources = File.objects.all()
     resource_list = []
@@ -159,6 +164,9 @@ def resources(request):
 
 def users(request):
     current_host = request.user
+    if not current_host.enabled:
+        logout(request)
+        return HttpResponseRedirect('/')
 
     all_users = User.objects.filter(enabled=True)
     user_list = []
