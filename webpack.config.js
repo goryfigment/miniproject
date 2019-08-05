@@ -34,7 +34,7 @@ module.exports = {
         new BundleTracker({filename: './webpack-stats.json'}),
         new ExtractTextPlugin('css/[name].css'),
         new webpack.optimize.CommonsChunkPlugin('vendors'),
-        //new UglifyJSPlugin({mangle: {except: ['$super', '$', 'exports', 'require']}, extractComments: true}),
+        new UglifyJSPlugin({mangle: {except: ['$super', '$', 'exports', 'require']}, extractComments: true}),
 
         //Purify CSS
         //new PurifyCSSPlugin({paths: glob.sync([path.join(__dirname, 'templates/*.html'), path.join(__dirname, 'templates/partials/*.html')]), minimize: true,
