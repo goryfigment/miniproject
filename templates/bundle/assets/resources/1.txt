@@ -1,5 +1,0 @@
-1. add reflection checkbox/dialog - DONE
-2. resolution check - DONE
-3. checkbox for levels - DONE
-4. new webpage (resources) - name, filename, download/url
-5. upload pdf - DONE
