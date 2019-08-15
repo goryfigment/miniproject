@@ -101,9 +101,9 @@ ENV/
 node_modules
 settings_secret.py
 static_data
-assets/lessons/*
-assets/resources/*
-assets/temporary/*
-assets/document/*
+assets/lessons
+assets/resources
+assets/temporary
+assets/document
 migrations
 
