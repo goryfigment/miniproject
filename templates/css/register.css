@@ -3,14 +3,15 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #990101;
+    background: #be5251;
 }
 
 h2 {
-    color: #e66c6c;
+    color: #ff8181;
     text-align: center;
     font-size: 19px;
     margin-bottom: 12px;
+    margin-top: 0;
 }
 
 label {
@@ -104,11 +105,6 @@ label {
 
 
 /*CHECK*/
-
-h1, h2, h3, h4, h5 {
-    margin: 0;
-    color: #5DBCD2;
-}
 
 label {
     display: block;

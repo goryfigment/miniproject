@@ -30,7 +30,7 @@
 }
 
 #home-header {
-    background: #990101;
+    background: #be5251;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -41,6 +41,7 @@
 
 #home-title {
     color: #f6f6f6;
+    letter-spacing: 2px;
 }
 
 #home-points {
