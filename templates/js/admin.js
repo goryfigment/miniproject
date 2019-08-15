@@ -198,9 +198,13 @@ $(document).ready(function() {
                 console.log(JSON.stringify(response));
                 $('#lesson-cancel-button').click();
                 var $lessonListWrapper = $('#lesson-list-wrapper');
+                var $activityWrapper = $('#activity-wrapper');
                 globals.lessons = response['lessons'];
+
                 $lessonListWrapper.empty();
                 $lessonListWrapper.append(lessonTemplate(globals.lessons));
+                $activityWrapper.empty();
+                $activityWrapper.append(activityFeedTemplate(globals.lessons));
 
                 var $overlay = $('#overlay');
                 $overlay.empty();

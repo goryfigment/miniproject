@@ -40,6 +40,10 @@ function capitalize(value) {
 $(document).ready(function() {
     init();
 
+    $(document).on('click', '#upload-wrapper, #link-overlay-wrapper', function (e) {
+        e.stopPropagation();
+    });
+
     $(document).on('click', '#home-link', function () {
         window.location.replace(globals.base_url + '/dashboard');
     });
