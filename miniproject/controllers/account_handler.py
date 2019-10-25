@@ -156,12 +156,12 @@ def reset_password(request):
 
     # Create message container - the correct MIME type is multipart/alternative.
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "Forgotten Password"
+    msg['Subject'] = "LVMC - Forgotten Password"
     msg['From'] = from_email
     msg['To'] = to_email
 
     # Create the body of the message (a plain-text and an HTML version).
-    text = "Hi " + name + "!\nWe received a request to reset your password.\n\n" \
+    text = "Hi " + name + "!\nWe received a request to reset your LVMC password.\n\n" \
            "Click the link to change your password: " + link
     html = """\
     <html>
